@@ -12,7 +12,6 @@ const AccountSettingsModal = ({
   signInError
 }) => {
 
-
   return (
     <div
       className={
@@ -61,7 +60,7 @@ const AccountSettingsModal = ({
                 {modalState.settingsType === "delete" && (
                   <p className="text-black text-center ">
                     Are you sure you want delete your account and all your
-                    posts?
+                    data?
                   </p>
                 )}
                 {modalState.settingsType === "email" && (

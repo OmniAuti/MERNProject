@@ -15,7 +15,7 @@ server.use("/api/v1/items", router);
 server.use(express.urlencoded({ extended: true }));
 server.use(notFound);
 
-const port = 2000;
+const port = process.env.PORT || 2000;
 
 const start = async () => {
   try {

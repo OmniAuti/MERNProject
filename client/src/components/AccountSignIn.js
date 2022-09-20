@@ -2,6 +2,7 @@ import { UserAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+
 const AccountSignIn = ({ handleActiveSignIn, activeSignUp }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,10 +12,10 @@ const AccountSignIn = ({ handleActiveSignIn, activeSignUp }) => {
 
   const navigate = useNavigate();
 
+
   const { logInUser, passwordReset } = UserAuth();
 
   const handlePasswordReset = async () => {
-    console.log(email, "ths is reset");
     if (email === "" || email === undefined) {
       setEmailCheckPassReset(true);
       return;
@@ -48,6 +49,7 @@ const AccountSignIn = ({ handleActiveSignIn, activeSignUp }) => {
       setSignInError(true);
     }
   };
+
 
   return (
     <div className="flex flex-col items-center justify-center py-2 w-full">

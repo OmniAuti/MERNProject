@@ -51,6 +51,7 @@ useEffect(() => {
               >
                 Resend Verification Email
               </button>
+             <Link to="/dashboard"><p className="w-full text-black bg-slate-400 rounded-sm mt-2 h-10 flex items-center justify-center">Account Dashboard</p></Link>
             </div>
           )}
         </>

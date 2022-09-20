@@ -12,7 +12,8 @@ import {
   sendPasswordResetEmail,
   reauthenticateWithCredential,
 } from "firebase/auth";
-import firebaseApp, { auth } from "../firebase";
+import { auth } from "../firebase";
+
 
 const UserContext = createContext();
 
@@ -34,12 +35,12 @@ const AuthContextProvider = ({ children }) => {
 
   const createUser = async (email, password) => {
     await createUserWithEmailAndPassword(auth, email, password);
-    await sendEmailVerification(auth.currentUser)
+    await sendEmailVerification(auth.currentUser);
   };
 
   const reSendEmailVerification = async () => {
-    return sendEmailVerification(auth.currentUser)
-  }
+    return sendEmailVerification(auth.currentUser);
+  };
   const logInUser = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
@@ -68,8 +69,8 @@ const AuthContextProvider = ({ children }) => {
 
   // PASSWORD RESET
   const passwordReset = async (email) => {
-   return sendPasswordResetEmail(auth, email)
-  }
+    return sendPasswordResetEmail(auth, email);
+  };
 
   return (
     <UserContext.Provider

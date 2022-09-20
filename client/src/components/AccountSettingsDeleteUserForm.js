@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { UserAuth } from "../context/AuthContext";
 
 const AccountSettingsDeleteUserForm = ({ handleSettingsChangeSubmit }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [radio, setRadio] = useState("no");
   const [showNo, setShowNo] = useState(false);
+
+  const {user} = UserAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +23,6 @@ const AccountSettingsDeleteUserForm = ({ handleSettingsChangeSubmit }) => {
       }
     }
   };
-
   return (
     <>
       {showNo && (
@@ -56,16 +58,21 @@ const AccountSettingsDeleteUserForm = ({ handleSettingsChangeSubmit }) => {
             className="cursor-pointer"
           />
         </div>
-        <label className="pl-2 text-black">Re-enter Password</label>
+        {user.providerData[0].providerId === "password" && (
+          <>
+            {" "}
+            <label className="pl-2 text-black">Re-enter Password</label>
+            <input
+              required
+              type="password"
+              className="block text-black my-1 mb-3 p-1 w-full border text-center rounded-md "
+              placeholder="Validation"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          </>
+        )}
         <input
-          required
-          type="password"
-          className="block text-black my-1 mb-3 p-1 w-full border text-center rounded-md "
-          placeholder="Validation"
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <input
-          className="bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:bg-sky-900 cursor-pointer"
+          className={user.providerData[0].providerId === "password" ? "bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:bg-sky-900 cursor-pointer" : "bg-sky-500 w-full h-10 my-8 text-black rounded-sm hover:bg-sky-900 cursor-pointer"}
           type="submit"
           value="Delete Account"
         />

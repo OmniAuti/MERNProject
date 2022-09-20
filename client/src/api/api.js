@@ -1,22 +1,22 @@
 import axios from "axios";
 
-const url = "http://localhost:2000/api/v1/items";
-const urlTwo = "http://localhost:2000/api/v1/items/filter";
-const urlThree = "http://localhost:2000/api/v1/items/ask";
-const urlFour = "http://localhost:2000/api/v1/items/modal";
-const urlFive = "http://localhost:2000/api/v1/items/account-items";
-const urlSix = "http://localhost:2000/api/v1/items/account-asked";
-const urlSeven = "http://localhost:2000/api/v1/items/bookmarked";
-const urlEight = "http://localhost:2000/api/v1/items/delete-single-item";
-const urlNine = "http://localhost:2000/api/v1/items/get-asked-items";
-const urlTen = "http://localhost:2000/api/v1/items/bookmarked-account";
-const urlEleven = "http://localhost:2000/api/v1/items/single-ask-item";
-const urlTwelve = "http://localhost:2000/api/v1/items/account-offered-edit";
-const urlThirteen = "http://localhost:2000/api/v1/items/account-asked-edit";
-const urlFourteen = "http://localhost:2000/api/v1/items/delete-all-account-data";
-const urlFifteen = "http://localhost:2000/api/v1/items/filter-asked";
-const urlSixteen = "http://localhost:2000/api/v1/items/bookmark-ask-item";
-const urlSeventeen = "http://localhost:2000/api/v1/items/attach-photo-info";
+const url = "/api/v1/items";
+const urlTwo = "/api/v1/items/filter";
+const urlThree = "/api/v1/items/ask";
+const urlFour = "/api/v1/items/modal";
+const urlFive = "/api/v1/items/account-items";
+const urlSix = "/api/v1/items/account-asked";
+const urlSeven = "/api/v1/items/bookmarked";
+const urlEight = "/api/v1/items/delete-single-item";
+const urlNine = "/api/v1/items/get-asked-items";
+const urlTen = "/api/v1/items/bookmarked-account";
+const urlEleven = "/api/v1/items/single-ask-item";
+const urlTwelve = "/api/v1/items/account-offered-edit";
+const urlThirteen = "/api/v1/items/account-asked-edit";
+const urlFourteen = "/api/v1/items/delete-all-account-data";
+const urlFifteen = "/api/v1/items/filter-asked";
+const urlSixteen = "/api/v1/items/bookmark-ask-item";
+const urlSeventeen = "/api/v1/items/attach-photo-info";
 
 export const fetchAllItems = async () => {
   return axios.get(url);

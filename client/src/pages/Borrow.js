@@ -29,7 +29,6 @@ const Borrow = ({ modalDispatch, handlePostFailure }) => {
     } catch (err) {
       setErrorPlaceholder(err.toString())
       setIsLoaded(true);
-      console.log(err);
     }
   };
 

@@ -24,6 +24,7 @@ import ProtectedUserRoute from "./components/ProtectedUserRoute";
 import ProtectedUserRouteVerified from "./components/ProtectedUserRouteVerified";
 import AccountSettings from "./pages/AccountSettings";
 import AccountNeedsVerification from "./pages/AccountNeedsVerification";
+import ErrorPage from "./pages/ErrorPage";
 //WRAP FOR SCROLL TO TOP ON NEW ROUTE
 import ScrollToTop from "./components/ScrollToTop";
 // REDUCERS 
@@ -269,6 +270,8 @@ function App() {
                   </ProtectedUserRoute>
                 }
               />
+              <Route path="/*"
+              element={<ErrorPage/>}/>
             </Routes>
           </ScrollToTop>
         </main>

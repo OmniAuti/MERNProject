@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import { getStorage} from "firebase/storage";
 
 
 // const firebaseConfig = {
@@ -24,9 +24,10 @@ const firebaseConfig = {
   measurementId: "G-VF48B1F9GT"
 };
 
-
 // Initialize Firebase
 const firebaseApp = initializeApp(firebaseConfig);
 export default firebaseApp;
 export const auth = getAuth(firebaseApp);
 export const storage = getStorage(firebaseApp)
+//NEW --------------
+

@@ -3,7 +3,7 @@ import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 import firebase from "firebase/compat/app";
 
-function AccountSignInGoogle(props) {
+function AccountGoogleReAuthorization(props) {
   useEffect(() => {
     const ui =
       firebaseui.auth.AuthUI.getInstance() ||
@@ -11,14 +11,15 @@ function AccountSignInGoogle(props) {
     ui.start("#firebaseCont", {
       signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
       signInFlow: "popup",
-      signInSuccessUrl: "/dashboard",
-      // Terms of service url.
-      tosUrl: "<your-tos-url>",
-      // Privacy policy url.
-      privacyPolicyUrl: "<your-privacy-policy-url>",
+      callbacks: {
+        signInSuccess: () => {
+            props.handleAuthorize()
+            return false;
+        },
+      },
     });
   }, [props.auth]);
-  return <div className="bg-white w-screen sm:w-96" id="firebaseCont"></div>;
+  return <div className="bg-white w-full" id="firebaseCont"></div>;
 }
 
-export default AccountSignInGoogle;
+export default AccountGoogleReAuthorization;

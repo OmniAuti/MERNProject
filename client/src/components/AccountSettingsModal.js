@@ -9,9 +9,9 @@ const AccountSettingsModal = ({
   handleSettingsChangeSubmit,
   editSuccess,
   errorMsg,
-  signInError
+  signInError,
+  userProviderData,
 }) => {
-
   return (
     <div
       className={
@@ -59,8 +59,7 @@ const AccountSettingsModal = ({
                 )}
                 {modalState.settingsType === "delete" && (
                   <p className="text-black text-center ">
-                    Are you sure you want delete your account and all your
-                    data?
+                    Are you sure you want delete your account and all your data?
                   </p>
                 )}
                 {modalState.settingsType === "email" && (
@@ -70,20 +69,24 @@ const AccountSettingsModal = ({
                 )}
                 {modalState.settingsType === "email" && (
                   <AccountSettingsChangeEmailForm
+                    userProviderData={userProviderData}
                     handleSettingsChangeSubmit={handleSettingsChangeSubmit}
                     userEmail={userEmail}
                   />
                 )}
                 {modalState.settingsType === "password" && (
                   <AccountSettingsChangePasswordForm
+                    userProviderData={userProviderData}
                     handleSettingsChangeSubmit={handleSettingsChangeSubmit}
                   />
                 )}
                 {modalState.settingsType === "delete" && (
                   <AccountSettingsDeleteUserForm
+                    userProviderData={userProviderData}
                     handleSettingsChangeSubmit={handleSettingsChangeSubmit}
                   />
                 )}
+
                 <button
                   onClick={() => settingsDispatch({ type: "CLOSE" })}
                   className="w-full h-10 bg-gray-400 rounded-sm rounded-bl-sm hover:bg-gray-700"

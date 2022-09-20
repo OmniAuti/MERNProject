@@ -1,9 +1,19 @@
 import { useState, useRef } from "react";
+import AccountGoogleReAuthorization from "./AccountGoogleReAuthorization";
+import { auth } from "firebaseui";
 
-const AccountSettingsChangePasswordForm = ({ handleSettingsChangeSubmit }) => {
+const AccountSettingsChangePasswordForm = ({
+  handleSettingsChangeSubmit,
+  userProviderData,
+}) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmOldPassword, setConfirmOldPassword] = useState("");
+  const [authorized, setAuthorized] = useState(false);
+
+  const handleAuthorize = () => {
+    setAuthorized(true);
+  };
 
   const confirmedCheck = useRef();
 
@@ -13,7 +23,7 @@ const AccountSettingsChangePasswordForm = ({ handleSettingsChangeSubmit }) => {
       await handleSettingsChangeSubmit(newPassword, confirmOldPassword);
       setNewPassword("");
       setConfirmPassword("");
-      setConfirmOldPassword("")
+      setConfirmOldPassword("");
     } catch (e) {
       console.log(e);
     }
@@ -44,9 +54,11 @@ const AccountSettingsChangePasswordForm = ({ handleSettingsChangeSubmit }) => {
         placeholder="New Password"
         minLength={6}
       />
-      <label htmlFor="confirmPassword" className="pl-2 text-black">Re-enter New Password</label>
+      <label htmlFor="confirmPassword" className="pl-2 text-black">
+        Re-enter New Password
+      </label>
       <input
-      id="confirmPassword"
+        id="confirmPassword"
         required
         type="password"
         className="block text-black my-1 mb-3 p-1 w-[90%] mx-auto border text-center rounded-md "
@@ -57,17 +69,34 @@ const AccountSettingsChangePasswordForm = ({ handleSettingsChangeSubmit }) => {
         onKeyUp={handleConfirmedPassword}
         ref={confirmedCheck}
       />
-      <label htmlFor="validatePassword" className="pl-2 text-black">Confirm Old Password</label>
-      <input
-        id="validatePassword"
-        required
-        type="password"
-        className="block text-black my-1 mb-3 p-1 w-[90%] mx-auto border text-center rounded-md "
-        placeholder="Validation"
-        onChange={(e) => setConfirmOldPassword(e.target.value)}
-        minLength={6}
-        value={confirmOldPassword}
-      />
+      {userProviderData === "password" ? (
+        <>
+          {" "}
+          <label htmlFor="validatePassword" className="pl-2 text-black">
+            Confirm Old Password
+          </label>
+          <input
+            id="validatePassword"
+            required
+            type="password"
+            className="block text-black my-1 mb-3 p-1 w-[90%] mx-auto border text-center rounded-md "
+            placeholder="Validation"
+            onChange={(e) => setConfirmOldPassword(e.target.value)}
+            minLength={6}
+            value={confirmOldPassword}
+          />{" "}
+        </>
+      ) : (
+        <>
+          <label htmlFor="validatePassword" className={!authorized ? "pl-2 text-black" : "hidden"}>
+            Please Reauthorize Your Account
+          </label>
+          <AccountGoogleReAuthorization
+            handleAuthorize={handleAuthorize}
+            auth={auth}
+          />
+        </>
+      )}
       <input
         className="bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:bg-sky-900 cursor-pointer"
         type="submit"

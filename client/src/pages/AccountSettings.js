@@ -17,9 +17,9 @@ const AccountSettings = () => {
   } = UserAuth();
   const [submitEdit, setSubmitEdit] = useState(false);
   const [editSuccess, setEditSuccess] = useState(false);
-console.log(user)
   const [errorMsg, setErrorMsg] = useState("");
   const [signInError, setSignInError] = useState(false);
+  const [userProviderData, setUserProviderData] = useState("");
 
   const handleError = (err, bool) => {
     const erro = err.toString().slice(25, err.toString().length - 1);
@@ -51,11 +51,12 @@ console.log(user)
   useEffect(() => {
     if (user === undefined) return;
     setUserEmail(user.email);
+    setUserProviderData(user.providerData[0].providerId);
   }, [user, submitEdit]);
 
   const handleSettingsChangeSubmit = async (newInfo, rePassword) => {
     try {
-      if (user.providerData[0].providerId === "password") {
+      if (userProviderData === "password") {
         const cred = await handleReAuth(rePassword);
         await reAuth(cred);
       }
@@ -88,6 +89,7 @@ console.log(user)
       </p>
 
       <AccountSettingsModal
+        userProviderData={userProviderData}
         errorMsg={errorMsg}
         signInError={signInError}
         settingsDispatch={settingsDispatch}
@@ -98,37 +100,33 @@ console.log(user)
       />
 
       <div className="flex justify-around flex-col md:flex-row">
-        {user.providerData[0].providerId === "password" && (
-          <>
-            {" "}
-            <div className="text-center my-10">
-              <img
-                className="md:w-[100px] w-[215px] mx-auto my-10"
-                src="/imgs/emailChange.svg"
-                alt="Change Email Icon"
-              />{" "}
-              <button
-                onClick={() => settingsDispatch({ type: "EMAIL" })}
-                className="bg-sky-500 w-full md:w-[225px] md:px-5 text-xl py-3 rounded-sm hover:bg-sky-900"
-              >
-                Change Email
-              </button>
-            </div>
-            <div className="text-center my-10">
-              <img
-                className="md:w-[100px] w-[215px] mx-auto my-10"
-                src="/imgs/passwordChange.svg"
-                alt="Change Password Icon"
-              />
-              <button
-                onClick={() => settingsDispatch({ type: "PASSWORD" })}
-                className="bg-sky-500 w-full md:w-[225px] md:px-5 text-xl  py-3 rounded-sm  hover:bg-sky-900"
-              >
-                Change Password
-              </button>
-            </div>
-          </>
-        )}
+        {" "}
+       {userProviderData === 'password' && <div className="text-center my-10">
+          <img
+            className="md:w-[100px] w-[215px] mx-auto my-10"
+            src="/imgs/emailChange.svg"
+            alt="Change Email Icon"
+          />{" "}
+          <button
+            onClick={() => settingsDispatch({ type: "EMAIL" })}
+            className="bg-sky-500 w-full md:w-[225px] md:px-5 text-xl py-3 rounded-sm hover:bg-sky-900"
+          >
+            Change Email
+          </button>
+        </div>}
+        <div className="text-center my-10">
+          <img
+            className="md:w-[100px] w-[215px] mx-auto my-10"
+            src="/imgs/passwordChange.svg"
+            alt="Change Password Icon"
+          />
+          <button
+            onClick={() => settingsDispatch({ type: "PASSWORD" })}
+            className="bg-sky-500 w-full md:w-[225px] md:px-5 text-xl  py-3 rounded-sm  hover:bg-sky-900"
+          >
+            Change Password
+          </button>
+        </div>
         <div className="text-center my-10">
           <img
             className="md:w-[115px] w-[215px] pl-[32px] md:pl-[17px] mx-auto my-10"

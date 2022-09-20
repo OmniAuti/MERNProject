@@ -23,7 +23,7 @@ const AccountGateway = () => {
 
 
   return (
-    <section className="flex items-center justify-center flex-col pt-16">
+    <section className="flex items-center justify-center flex-col">
       <div
         className={
           activeSignUp

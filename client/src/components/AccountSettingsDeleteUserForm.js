@@ -1,12 +1,19 @@
 import { useState } from "react";
 import { UserAuth } from "../context/AuthContext";
+import AccountGoogleReAuthorization from "./AccountGoogleReAuthorization";
+import { auth } from "../firebase";
 
 const AccountSettingsDeleteUserForm = ({ handleSettingsChangeSubmit }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [radio, setRadio] = useState("no");
   const [showNo, setShowNo] = useState(false);
+  const [authorized, setAuthorized] = useState(false);
 
-  const {user} = UserAuth()
+  const { user } = UserAuth();
+
+  const handleAuthorize = () => {
+    setAuthorized(true);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +65,7 @@ const AccountSettingsDeleteUserForm = ({ handleSettingsChangeSubmit }) => {
             className="cursor-pointer"
           />
         </div>
-        {user.providerData[0].providerId === "password" && (
+        {user.providerData[0].providerId === "password" ? (
           <>
             {" "}
             <label className="pl-2 text-black">Re-enter Password</label>
@@ -70,9 +77,22 @@ const AccountSettingsDeleteUserForm = ({ handleSettingsChangeSubmit }) => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </>
+        ) : (
+          <>
+            <label
+              htmlFor="validatePassword"
+              className={!authorized ? "pl-2 text-black" : "hidden"}
+            >
+              Please Reauthorize Your Account
+            </label>
+            <AccountGoogleReAuthorization
+              handleAuthorize={handleAuthorize}
+              auth={auth}
+            />
+          </>
         )}
         <input
-          className={user.providerData[0].providerId === "password" ? "bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:bg-sky-900 cursor-pointer" : "bg-sky-500 w-full h-10 my-8 text-black rounded-sm hover:bg-sky-900 cursor-pointer"}
+          className={authorized ? "bg-sky-500 w-full h-10 my-2 mt-10 text-black rounded-sm hover:bg-sky-900 cursor-pointer" : "bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:bg-sky-900 cursor-pointer"}
           type="submit"
           value="Delete Account"
         />

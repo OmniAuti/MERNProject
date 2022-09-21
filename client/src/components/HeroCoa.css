@@ -1,6 +1,6 @@
 .hero-text-box {
     height: 110px;
-    width: calc(100% - 165px)
+    width: calc(100% - 185px)
 }
 
 @media (max-width: 350px) {

@@ -24,21 +24,21 @@ const TermsOfService = () => {
         viewing only. This is the grant of a license, not a transfer of title,
         and under this license you may not:
       </p>
-      <ul className="flex justify-between item-center my-5 text-center">
-        <li>modify or copy the materials</li>
-        <li>
+      <ul className="my-5 text-center">
+        <li className="my-2">modify or copy the materials</li>
+        <li className="my-2">
           use the materials for any commercial purpose or for any public
           display
         </li>
-        <li>
+        <li className="my-2">
           attempt to reverse engineer any software contained on BorrowAPencil's
           Website
         </li>
-        <li>
+        <li className="my-2">
           remove any copyright or other proprietary notations from the
           materials
         </li>
-        <li>
+        <li className="my-2">
           transfer the materials to another person or "mirror" the materials
           on any other server.
         </li>

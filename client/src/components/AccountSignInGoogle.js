@@ -12,10 +12,8 @@ function AccountSignInGoogle(props) {
       signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
       signInFlow: "popup",
       signInSuccessUrl: "/dashboard",
-      // Terms of service url.
-      tosUrl: "<your-tos-url>",
-      // Privacy policy url.
-      privacyPolicyUrl: "<your-privacy-policy-url>",
+      tosUrl: "terms-of-service",
+      privacyPolicyUrl: "/privacy-policy",
     });
   }, [props.auth]);
   return <div className="bg-white w-screen sm:w-96" id="firebaseCont"></div>;

@@ -25,9 +25,11 @@ import ProtectedUserRouteVerified from "./components/ProtectedUserRouteVerified"
 import AccountSettings from "./pages/AccountSettings";
 import AccountNeedsVerification from "./pages/AccountNeedsVerification";
 import ErrorPage from "./pages/ErrorPage";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 //WRAP FOR SCROLL TO TOP ON NEW ROUTE
 import ScrollToTop from "./components/ScrollToTop";
-// REDUCERS 
+// REDUCERS
 import { modalReducer } from "./reducers/modalReducer";
 //CONTEXT IMPORT
 import AuthContextProvider from "./context/AuthContext";
@@ -35,9 +37,7 @@ import AuthContextProvider from "./context/AuthContext";
 import { getSingleItem, getSingleItemAsk } from "./api/api";
 // USE REDUCER FUNCTION
 
-
 function App() {
- 
   const [state, modalDispatch] = useReducer(modalReducer, {
     modalId: "",
     active: false,
@@ -245,7 +245,12 @@ function App() {
 
               <Route
                 path="/asked"
-                element={<Asked modalDispatch={modalDispatch}handlePostFailure={handlePostFailure} />}
+                element={
+                  <Asked
+                    modalDispatch={modalDispatch}
+                    handlePostFailure={handlePostFailure}
+                  />
+                }
               />
 
               <Route
@@ -270,8 +275,9 @@ function App() {
                   </ProtectedUserRoute>
                 }
               />
-              <Route path="/*"
-              element={<ErrorPage/>}/>
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/*" element={<ErrorPage />} />
             </Routes>
           </ScrollToTop>
         </main>

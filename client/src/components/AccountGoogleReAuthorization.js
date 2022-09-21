@@ -12,7 +12,7 @@ function AccountGoogleReAuthorization(props) {
       signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
       signInFlow: "popup",
       callbacks: {
-        signInSuccess: () => {
+        signInSuccessWithAuthResult: () => {
             props.handleAuthorize()
             return false;
         },

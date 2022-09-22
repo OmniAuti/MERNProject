@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 const TermsOfService = () => {
   return (
     <article>
-      <h1 className="text-4xl text-center">Terms and Conditions of Use</h1>
+      <h1 className="text-4xl ">Terms and Conditions of Use</h1>
 
       <h2 className="text-2xl my-5">Terms</h2>
 
-      <p className="font-thin text-center">
+      <p className="font-thin ">
         By accessing this Website, accessible from BorrowAPencil.com, you are
         agreeing to be bound by these Website Terms and Conditions of Use and
         agree that you are responsible for the agreement with any applicable
@@ -18,7 +18,7 @@ const TermsOfService = () => {
 
       <h2 className="text-2xl my-5">Use License</h2>
 
-      <p className="font-thin text-center">
+      <p className="font-thin ">
         Permission is granted to temporarily download one copy of the materials
         on BorrowAPencil's Website for personal, non-commercial transitory
         viewing only. This is the grant of a license, not a transfer of title,
@@ -44,7 +44,7 @@ const TermsOfService = () => {
         </li>
       </ul>
 
-      <p className="font-thin text-center">
+      <p className="font-thin ">
         This will let BorrowAPencil to terminate upon violations of any of these
         restrictions. Upon termination, your viewing right will also be
         terminated and you should destroy any downloaded materials in your
@@ -53,7 +53,7 @@ const TermsOfService = () => {
 
       <h2 className="text-2xl my-5">Disclaimer</h2>
 
-      <p className="font-thin text-center">
+      <p className="font-thin ">
         All the materials on BorrowAPencil’s Website are provided "as is".
         BorrowAPencil makes no warranties, may it be expressed or implied,
         therefore negates all other warranties. Furthermore, BorrowAPencil does
@@ -64,7 +64,7 @@ const TermsOfService = () => {
 
       <h2 className="text-2xl my-5">Limitations</h2>
 
-      <p className="font-thin text-center">
+      <p className="font-thin ">
         BorrowAPencil or its suppliers will not be hold accountable for any
         damages that will arise with the use or inability to use the materials
         on BorrowAPencil’s Website, even if BorrowAPencil or an authorize
@@ -76,7 +76,7 @@ const TermsOfService = () => {
 
       <h2 className="text-2xl my-5">Revisions and Errata</h2>
 
-      <p className="font-thin text-center">
+      <p className="font-thin ">
         The materials appearing on BorrowAPencil’s Website may include
         technical, typographical, or photographic errors. BorrowAPencil will not
         promise that any of the materials in this Website are accurate,
@@ -87,7 +87,7 @@ const TermsOfService = () => {
 
       <h2 className="text-2xl my-5">Links</h2>
 
-      <p className="font-thin text-center">
+      <p className="font-thin ">
         BorrowAPencil has not reviewed all of the sites linked to its Website
         and is not responsible for the contents of any such linked site. The
         presence of any link does not imply endorsement by BorrowAPencil of the
@@ -96,7 +96,7 @@ const TermsOfService = () => {
 
       <h2 className="text-2xl my-5">Site Terms of Use Modifications</h2>
 
-      <p className="font-thin text-center">
+      <p className="font-thin ">
         BorrowAPencil may revise these Terms of Use for its Website at any time
         without prior notice. By using this Website, you are agreeing to be
         bound by the current version of these Terms and Conditions of Use.
@@ -104,11 +104,11 @@ const TermsOfService = () => {
 
       <h2 className="text-2xl my-5">Your Privacy</h2>
 
-      <p className="font-thin text-center"><Link to="/privacy-policy">Please read our <u>Privacy Policy.</u></Link></p>
+      <p className="font-thin "><Link to="/privacy-policy">Please read our <u>Privacy Policy.</u></Link></p>
 
       <h2 className="text-2xl my-5">Governing Law</h2>
 
-      <p className="font-thin text-center">
+      <p className="font-thin ">
         Any claim related to BorrowAPencil's Website shall be governed by the
         laws of US without regards to its conflict of law provisions.
       </p>

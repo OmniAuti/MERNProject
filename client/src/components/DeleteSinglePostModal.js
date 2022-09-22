@@ -38,7 +38,7 @@ const DeleteSinglePostModal = ({
         try {
           const storage = getStorage();
           const deleteRef = ref(storage, postId.modalId[2].imageRef);
-          await deleteObject(deleteRef).then((res) => console.log(res));
+          await deleteObject(deleteRef)
         } catch (err) {
           setWhy(err.toString());
           setDeletionFailure(true);

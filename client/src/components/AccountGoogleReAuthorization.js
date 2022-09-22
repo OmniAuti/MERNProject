@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import * as firebaseui from "firebaseui";
 import "firebaseui/dist/firebaseui.css";
 import firebase from "firebase/compat/app";
+import 'firebase/compat/auth';
 
 function AccountGoogleReAuthorization(props) {
   useEffect(() => {

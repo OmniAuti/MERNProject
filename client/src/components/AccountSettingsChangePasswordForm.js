@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import AccountGoogleReAuthorization from "./AccountGoogleReAuthorization";
-import { auth } from "firebaseui";
+import { auth } from "../firebase";
 
 const AccountSettingsChangePasswordForm = ({
   handleSettingsChangeSubmit,

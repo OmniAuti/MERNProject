@@ -12,7 +12,7 @@ function AccountSignInGoogle(props) {
       signInOptions: [firebase.auth.GoogleAuthProvider.PROVIDER_ID],
       signInFlow: "popup",
       signInSuccessUrl: "/dashboard",
-      tosUrl: "terms-of-service",
+      tosUrl: "/terms-of-service",
       privacyPolicyUrl: "/privacy-policy",
     });
   }, [props.auth]);

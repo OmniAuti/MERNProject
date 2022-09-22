@@ -22,6 +22,7 @@ import AccountGateway from "./pages/AccountGateway";
 import AccountDashboard from "./pages/AccountDashboard";
 import ProtectedUserRoute from "./components/ProtectedUserRoute";
 import ProtectedUserRouteVerified from "./components/ProtectedUserRouteVerified";
+import ProtectedUserRouteLoggedIn from "./components/ProtecedUserRouteLoggedIn";
 import AccountSettings from "./pages/AccountSettings";
 import AccountNeedsVerification from "./pages/AccountNeedsVerification";
 import ErrorPage from "./pages/ErrorPage";
@@ -203,7 +204,15 @@ function App() {
                   />
                 }
               />
-              <Route path="/account-gateway" element={<AccountGateway />} />
+              <Route
+                path="/account-gateway"
+                element={
+                  <ProtectedUserRouteLoggedIn>
+                    {" "}
+                    <AccountGateway />{" "}
+                  </ProtectedUserRouteLoggedIn>
+                }
+              />
 
               <Route
                 path="/dashboard"

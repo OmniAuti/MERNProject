@@ -35,7 +35,7 @@ const EmptyFilteredSuppliesPlaceHolder = ({ errorPlaceholder }) => {
           <p className="text-2xl font-thin mb-5 text-center">
             If you're having no luck, try posting on the{" "}
             <Link
-              to="/ask"
+              to="/ask-for"
               className="underline underline-offset-4 hover:underline-offset-1"
             >
               Ask page

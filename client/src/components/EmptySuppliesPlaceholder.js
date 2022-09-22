@@ -28,7 +28,7 @@ const EmptySuppliesPlaceHolder = ({ errorPlaceholder }) => {
           <p className="text-2xl font-thin">
             Try posting on the{" "}
             <Link
-              to="/ask"
+              to="/ask-for"
               className="underline underline-offset-4 hover:underline-offset-1"
             >
               Ask page

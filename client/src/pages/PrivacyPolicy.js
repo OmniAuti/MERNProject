@@ -1,8 +1,8 @@
 const PrivacyPolicy = () => {
   return (
     <article>
-      <h1 className="text-4xl  mb-5">
-        Privacy Policy for BorrowAPencil
+      <h1 className="text-4xl text-center mb-5">
+        Privacy Policy for BorrowAPencil.com
       </h1>
 
       <p className="font-thin ">

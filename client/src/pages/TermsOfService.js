@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const TermsOfService = () => {
   return (
     <article>
-      <h1 className="text-4xl ">Terms and Conditions of Use</h1>
+      <h1 className="text-4xl text-center">Terms and Conditions of Use</h1>
 
       <h2 className="text-2xl my-5">Terms</h2>
 

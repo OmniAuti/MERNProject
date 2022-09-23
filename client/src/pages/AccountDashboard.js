@@ -72,7 +72,7 @@ const AccountDashboard = ({ modalDispatch, refreshAfterEdit, handlePostFailure }
       setIsItemsLoaded(true);
     } catch (e) {
       setIsItemsLoaded(true)
-      setErrorPlaceholder(e.trString())
+      setErrorPlaceholder(e.toString())
       console.log(e);
     }
   };

@@ -69,34 +69,19 @@ const AccountSettingsChangePasswordForm = ({
         onKeyUp={handleConfirmedPassword}
         ref={confirmedCheck}
       />
-      {userProviderData === "password" ? (
-        <>
-          {" "}
-          <label htmlFor="validatePassword" className="pl-2 text-black">
-            Confirm Old Password
-          </label>
-          <input
-            id="validatePassword"
-            required
-            type="password"
-            className="block text-black my-1 mb-3 p-1 w-[90%] mx-auto border text-center rounded-md "
-            placeholder="Validation"
-            onChange={(e) => setConfirmOldPassword(e.target.value)}
-            minLength={6}
-            value={confirmOldPassword}
-          />{" "}
-        </>
-      ) : (
-        <>
-          <label htmlFor="validatePassword" className={!authorized ? "pl-2 text-black" : "hidden"}>
-            Please Reauthorize Your Account
-          </label>
-          <AccountGoogleReAuthorization
-            handleAuthorize={handleAuthorize}
-            auth={auth}
-          />
-        </>
-      )}
+      <label htmlFor="validatePassword" className="pl-2 text-black">
+        Confirm Old Password
+      </label>
+      <input
+        id="validatePassword"
+        required
+        type="password"
+        className="block text-black my-1 mb-3 p-1 w-[90%] mx-auto border text-center rounded-md "
+        placeholder="Validation"
+        onChange={(e) => setConfirmOldPassword(e.target.value)}
+        minLength={6}
+        value={confirmOldPassword}
+      />{" "}
       <input
         className="bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:bg-sky-900 cursor-pointer"
         type="submit"

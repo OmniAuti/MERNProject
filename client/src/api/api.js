@@ -80,9 +80,9 @@ export const deleteAllAccountData = async (id) => {
 };
 
 export const bookmarkAskItem = async (bookmark) => {
-  return axios.put(urlSixteen, bookmark)
-}
+  return axios.put(urlSixteen, bookmark);
+};
 
 export const attachPhotoInfo = async (imageInfoObj) => {
-  return axios.put(urlSeventeen, imageInfoObj)
-}
+  return axios.put(urlSeventeen, imageInfoObj);
+};

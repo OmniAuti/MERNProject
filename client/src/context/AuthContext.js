@@ -11,6 +11,8 @@ import {
   sendEmailVerification,
   sendPasswordResetEmail,
   reauthenticateWithCredential,
+  setPersistence,
+  browserLocalPersistence
 } from "firebase/auth";
 import { auth } from "../firebase";
 

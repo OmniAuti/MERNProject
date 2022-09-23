@@ -6,7 +6,6 @@ import { UserAuth } from "../context/AuthContext";
 import { useState, useEffect, useReducer } from "react";
 import { EmailAuthProvider } from "firebase/auth";
 import { deleteAllAccountData } from "../api/api";
-import { refreshGoogleAuth, googleAuthNewPassword } from "../api/api";
 
 const AccountSettings = () => {
   const {

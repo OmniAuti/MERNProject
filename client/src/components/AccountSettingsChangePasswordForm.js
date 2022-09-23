@@ -1,19 +1,11 @@
 import { useState, useRef } from "react";
-import AccountGoogleReAuthorization from "./AccountGoogleReAuthorization";
-import { auth } from "../firebase";
 
 const AccountSettingsChangePasswordForm = ({
   handleSettingsChangeSubmit,
-  userProviderData,
 }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [confirmOldPassword, setConfirmOldPassword] = useState("");
-  const [authorized, setAuthorized] = useState(false);
-
-  const handleAuthorize = () => {
-    setAuthorized(true);
-  };
 
   const confirmedCheck = useRef();
 

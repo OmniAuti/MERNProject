@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { UserAuth } from "../context/AuthContext";
-import AccountGoogleReAuthorization from "./AccountGoogleReAuthorization";
-import { auth } from "../firebase";
 
 const AccountSettingsDeleteUserForm = ({ handleSettingsChangeSubmit }) => {
   const [confirmPassword, setConfirmPassword] = useState("");

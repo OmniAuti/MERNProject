@@ -121,8 +121,6 @@ const AccountBookmarkSupplyObjectCard = ({ data, modalDispatch }) => {
   }
 
   return (
-    // NEED TO MAKE A LIKE OPTION TO STORE IN INTEREST SECTIO OF ACCOUNT
-
     <div
       onClick={() =>
         modalDispatch({ type: `MODAL-${data.postType}`, payload: data._id })
@@ -163,31 +161,31 @@ const AccountBookmarkSupplyObjectCard = ({ data, modalDispatch }) => {
             )}
           </div>
           <ul className="w-1/2 pl-3 sm:pl-5 max-h-52 flex flex-col justify-center sm:justify-around">
-            <li className="text-black my-1">Quantity: {data.quantity}</li>
+            <li className="text-black my-1"><span className="text-black font-medium">Quantity: </span>{data.quantity}</li>
             {data.postType === "offer" ? (
-              <li className="text-black my-1">Condition: {data.condition}</li>
+              <li className="text-black my-1"><span className="text-black font-medium">Condition: </span>{data.condition}</li>
             ) : (
               <li className="text-black my-1">
-                Accepted Condition:{" "}
+                <span className="text-black font-medium">Accepted Condition:</span>{" "}
                 {data.condition
                   .join("")
                   .slice(0, data.condition.join("").length - 2)}
               </li>
             )}
-            <li className="text-black my-1 ">Location: {data.location}</li>
-            <li className="text-black my-1">Zipcode: {data.zipcode}</li>
+            <li className="text-black my-1 "><span className="text-black font-medium">Location: </span>{data.location}</li>
+            <li className="text-black my-1"><span className="text-black font-medium">Zipcode: </span>{data.zipcode}</li>
           </ul>
         </div>
         <div className="pl-3 sm:px-5">
           <ul>
             {data.postType === "offer" && (
               <li className="text-black m-1 clear-left">
-                Description: {data.description}
+                <span className="text-black font-medium">Description: </span>{data.description}
               </li>
             )}
             {data.postType === "ask" && (
               <li className="text-black m-1 clear-left">
-                Specifically Asked For: {data.specify}
+                <span className="text-black font-medium">Specifically Asked For: </span>{data.specify}
               </li>
             )}
           </ul>

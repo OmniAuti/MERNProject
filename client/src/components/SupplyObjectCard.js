@@ -129,10 +129,10 @@ const SupplyObjectCard = ({ data, modalDispatch }) => {
       onClick={() =>
         modalDispatch({ type: `MODAL-${data.postType}`, payload: data._id })
       }
-      className="w-screen lg:w-[32.33333%] lg:min-w-[318px] rounded-md my-2 lg:ml-[9px] p-1 cursor-pointer group"
+      className="w-screen lg:w-[32.33333%] lg:min-w-[318px] rounded-md my-2 lg:ml-[9px] p-1 cursor-pointer group relative"
       style={{ backgroundColor: cardBgColor }}
     >
-      <div className="relative bg-white w-full h-[310px] max-h-[310px] rounded-md overflow-hidden py-2 shadow-inner transition-all duration-500 hover:shadow-black outline">
+      <div className="relative bg-white w-full h-[310px] max-h-[310px] rounded-md overflow-hidden pt-2 shadow-inner transition-all duration-500 hover:shadow-black">
         <div className="h-52 max-h-52 min-h-52 w-full relative overflow-hidden">
           <div className="bg-black bg-opacity-80 w-fit absolute pr-10 pt-1 pb-20 -bottom-24 pl-40 -left-36 rounded-full text-2xl font-light">
             <p className="mb-5 -ml-2">
@@ -141,7 +141,11 @@ const SupplyObjectCard = ({ data, modalDispatch }) => {
           </div>
           {data.postType === "offer" ? (
             <img
-              className="h-52 max-h-52 min-h-52 w-full object-contain object-center"
+              className={
+                data.photoInfo.url === ""
+                  ? "h-52 max-h-52 min-h-52 w-full object-contain pb-1 object-center"
+                  : "h-52 max-h-52 min-h-52 w-full object-contain object-center"
+              }
               src={
                 data.photoInfo.url !== ""
                   ? data.photoInfo.url
@@ -157,32 +161,52 @@ const SupplyObjectCard = ({ data, modalDispatch }) => {
             />
           )}
         </div>
-        <ul className="mt-3 px-1 flex items-center justify-around">
-          <li className="text-black m-1 font-medium inline-block max-w-[140px] w-[125px] truncate">
-            Quantity:{" "}
-            <span className="text-black font-light">{data.quantity}</span>
-          </li>
-          {data.postType === "ask" ? (
-            <li className="text-black m-1 font-medium inline-block truncate ">
-              Accepted Condition:{" "}
-              <span className="text-black font-light">
-                {" "}
-                {data.condition
-                  .join("")
-                  .slice(0, data.condition.join("").length - 2)}
-              </span>{" "}
+        <ul className="flex flex-col justify-around shadow-inner group-hover:shadow-transparent transition-all duration-500">
+          <div className="flex items-center justify-between w-full px-8">
+            <li className="text-black m-1 mb-0 inline-block truncate ">
+              <span className="text-black font-medium w-full">Location: </span>
+              {data.location}
             </li>
-          ) : (
-            <li className="text-black m-1 font-medium inline-block truncate ">
-              Condition:{" "}
-              <span className="text-black font-light"> {data.condition}</span>{" "}
+            <li className="text-black m-1  mb-0 inline-block truncate">
+              <span className="text-black font-medium w-full">Zipcode: </span>
+              {data.zipcode}
             </li>
-          )}
+          </div>
+          <hr></hr>
+          <div className="flex items-center justify-around">
+            <li className="text-black m-1 mt-0 font-medium inline-block max-w-[140px] w-[125px] truncate">
+              Quantity:{" "}
+              <span className="text-black font-light">{data.quantity}</span>
+            </li>
+            {data.postType === "ask" ? (
+              <li className="text-black m-1 mt-0 font-medium inline-block truncate ">
+                Accepted Condition:{" "}
+                <span className="text-black font-light">
+                  {" "}
+                  {data.condition
+                    .join("")
+                    .slice(0, data.condition.join("").length - 2)}
+                </span>{" "}
+              </li>
+            ) : (
+              <li className="text-black m-1 mt-0 font-medium inline-block truncate ">
+                Condition:{" "}
+                <span className="text-black font-light bg">
+                  {" "}
+                  {data.condition}
+                </span>{" "}
+              </li>
+            )}
+          </div>
+          <hr></hr>
         </ul>
-        <button className="p-1 text-black absolute bg-sky-400 w-11/12 left-1/2 -translate-x-1/2 rounded-md bottom-2 font-base group-hover:bg-sky-900 group-hover:shadow-sm group-hover:text-white transition-colors duration-500">
-          More Details
+        <button
+          className="p-[6px] group-hover:text-white text-black group-hover:shadow-[0_2px_3px_3px_rgba(0,0,0,.5)] bg-slate-300 group-hover:bg-slate-400 absolute w-full left-1/2 -translate-x-1/2 bottom-0 rounded-b-md font-base transition-all duration-500"
+        >
+          Details
         </button>
       </div>
+     
     </div>
   );
 };

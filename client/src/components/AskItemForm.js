@@ -168,11 +168,11 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
                 <option default value="">
                   Who Are You?
                 </option>
-                <option default value="teacher">
+                <option default value="Teacher">
                   Teacher
                 </option>
 
-                <option value="parent">Parent</option>
+                <option value="Parent">Parent</option>
               </select>
               <label htmlFor="type">In need of a . . .</label>
               <select
@@ -290,7 +290,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
                   setAskObj({ ...askObj, location: e.target.value })
                 }
               >
-                <option value="">Somewhere City</option>
+                <option value="">Select Neighborhood</option>
                 <option value="Rogers Park">Rogers Park</option>
                 <option value="West Ridge">West Ridge</option>
                 <option value="Uptown">Uptown</option>
@@ -369,7 +369,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
                 <option value="East Side">East Side</option>
                 <option value="West Pullman">West Pullman</option>
                 <option value="Riverdale">Riverdale</option>
-                <option value="Hegewisch">Hegewisch (Hegewisch)</option>
+                <option value="Hegewisch">Hegewisch</option>
               </select>
               <label htmlFor="zipcode">Zipcode</label>
               {/* <input
@@ -398,7 +398,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
                 }
               >
                 
-                <option value="">12345</option>
+                <option value="">Select ZIP Code</option>
                 <option value="60290">60290</option>
                 <option value="60601">60601</option>
                 <option value="60602">60602</option>

@@ -159,7 +159,7 @@ const ModalEditOffer = ({
             Offer Item Edit:{" "}
           </legend>
 
-          <label htmlFor="type" className="text-black">
+          <label htmlFor="type" className="text-black font-medium">
             Type of supplies
           </label>
           <select
@@ -197,7 +197,7 @@ const ModalEditOffer = ({
             <option value="book">Book</option>
             <option value="misc. books">Misc. Books</option>
           </select>
-          <label htmlFor="description" className="text-black">
+          <label htmlFor="description" className="text-black font-medium">
             Description
           </label>
           <input
@@ -210,7 +210,7 @@ const ModalEditOffer = ({
             value={formData.description}
             placeholder="This has . . ."
           />
-          <label htmlFor="quantity" className="text-black">
+          <label htmlFor="quantity" className="text-black font-medium">
             Quantity
           </label>
           <input
@@ -224,7 +224,7 @@ const ModalEditOffer = ({
             min="1"
             value={formData.quantity}
           />
-          <label htmlFor="condition" className="text-black">
+          <label htmlFor="condition" className="text-black font-medium">
             Condition
           </label>
           <select
@@ -244,7 +244,7 @@ const ModalEditOffer = ({
             <option value="Moderately Used">Moderately Used</option>
             <option value="Heavily Used">Heavily Used</option>
           </select>
-          <label htmlFor="location" className="text-black">
+          <label htmlFor="location" className="text-black font-medium">
             General Location
           </label>
           {/* <input
@@ -268,7 +268,7 @@ const ModalEditOffer = ({
             maxLength="49"
             value={formData.location}
           >
-            <option value="">Somewhere City</option>
+            <option value="">Select Neighborhood</option>
             <option value="Rogers Park">Rogers Park</option>
             <option value="West Ridge">West Ridge</option>
             <option value="Uptown">Uptown</option>
@@ -347,9 +347,9 @@ const ModalEditOffer = ({
             <option value="East Side">East Side</option>
             <option value="West Pullman">West Pullman</option>
             <option value="Riverdale">Riverdale</option>
-            <option value="Hegewisch">Hegewisch (Hegewisch)</option>
+            <option value="Hegewisch">Hegewisch</option>
           </select>
-          <label htmlFor="zipcode" className="text-black">
+          <label htmlFor="zipcode" className="text-black font-medium">
             Zipcode
           </label>
           {/* <input
@@ -463,7 +463,7 @@ const ModalEditOffer = ({
             <option value="60696">60696</option>
             <option value="60701">60701</option>
           </select>
-          <label htmlFor="file" className="text-black">
+          <label htmlFor="file" className="text-black font-medium">
             Change Image
           </label>
           <input

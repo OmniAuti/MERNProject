@@ -124,7 +124,7 @@ const ModalEditAsk = ({
           <legend className="text-black text-xl underline underline-offset-1 mb-2">
             Ask Item Edit:{" "}
           </legend>
-          <label htmlFor="who" className="text-black mb-">
+          <label htmlFor="who" className="text-black font-medium">
             I am a . . .
           </label>
           <select
@@ -136,10 +136,10 @@ const ModalEditAsk = ({
             value={askObj.who}
           >
             <option value="">Who Are You?</option>
-            <option value="teacher">Teacher</option>
-            <option value="parent">Parent</option>
+            <option value="Teacher">Teacher</option>
+            <option value="Parent">Parent</option>
           </select>
-          <label htmlFor="type" className=" text-black">
+          <label htmlFor="type" className=" text-black font-medium">
             In need of a . . .
           </label>
           <select
@@ -177,7 +177,7 @@ const ModalEditAsk = ({
             <option value="book">Book</option>
             <option value="misc. books">Misc. Books</option>
           </select>
-          <label htmlFor="quantity" className=" text-black">
+          <label htmlFor="quantity" className=" text-black font-medium">
             Quantity
           </label>
           <input
@@ -191,7 +191,7 @@ const ModalEditAsk = ({
             value={askObj.quantity}
             onChange={(e) => handleQuantityChange(e)}
           />
-          <label className=" text-black" htmlFor="specify">
+          <label className=" text-black font-medium" htmlFor="specify ">
             Specify Your Needs
           </label>
           <input
@@ -206,13 +206,14 @@ const ModalEditAsk = ({
             placeholder="This is for . . ."
           />
           <hr className="mt-2"></hr>
-          <p className=" text-black my-2">
-            Currently Asked For Condition: {data.condition}
+          <p className=" text-black my-2 font-medium">
+            Currently Asked For Condition: {data.condition.join("")
+                  .slice(0, data.condition.join("").length - 2)}
           </p>
 
           <hr className="mb-2"></hr>
 
-          <label htmlFor="condition" className=" text-black underline">
+          <label htmlFor="condition" className=" text-black underline font-medium">
             Update Accepted Condition:
           </label>
 
@@ -237,7 +238,7 @@ const ModalEditAsk = ({
               );
             })}
           </div>
-          <label htmlFor="location" className=" text-black">
+          <label htmlFor="location" className=" text-black font-medium">
             General Location
           </label>
           {/* <input
@@ -262,7 +263,7 @@ const ModalEditAsk = ({
             placeholder="Somewhere City"
             value={askObj.location}
           >
-            <option value="">Somewhere City</option>
+            <option value="">Select Neighborhood</option>
             <option value="Rogers Park">Rogers Park</option>
             <option value="West Ridge">West Ridge</option>
             <option value="Uptown">Uptown</option>
@@ -341,9 +342,9 @@ const ModalEditAsk = ({
             <option value="East Side">East Side</option>
             <option value="West Pullman">West Pullman</option>
             <option value="Riverdale">Riverdale</option>
-            <option value="Hegewisch">Hegewisch (Hegewisch)</option>
+            <option value="Hegewisch">Hegewisch</option>
           </select>
-          <label htmlFor="zipcode" className=" text-black">
+          <label htmlFor="zipcode" className=" text-black font-medium">
             Zipcode
           </label>
           {/* <input

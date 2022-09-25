@@ -122,7 +122,7 @@ const AccountSupplyObjectCard = ({ data, modalDispatch }) => {
 
   return (
     <div
-      className=" w-full sm:rounded-md sm:my-1 sm:mx-[12px] p-1"
+      className=" w-full sm:rounded-md sm:my-1 sm:mx-[12px]"
       style={{ backgroundColor: cardBgColor }}
     >
       <div className="flex justify-around flex-col bg-white w-full h-full pb-2 rounded-md relative overflow-hidden">
@@ -149,30 +149,30 @@ const AccountSupplyObjectCard = ({ data, modalDispatch }) => {
           </div>
           <ul className="w-full sm:w-1/2 pl-2 sm:h-full max-h-52 flex flex-col justify-center sm:justify-around">
             {data.postType === "ask" && (
-              <li className="text-black my-1">Who: {data.who}</li>
+              <li className="text-black my-1"><span className="text-black font-medium">Who: </span>{data.who}</li>
             )}
-            <li className="text-black my-1 ">Quantity: {data.quantity}</li>
+            <li className="text-black my-1 "><span className="text-black font-medium">Quantity: </span>{data.quantity}</li>
             {data.postType === "ask" ? (
               <li className="text-black my-1">
-                Accepted Condition:{" "}
+                <span className="text-black font-medium">Accepted Condition:</span>{" "}
                 {data.condition
                   .join("")
                   .slice(0, data.condition.join("").length - 2)}
               </li>
             ) : (
               <li className="text-black my-1">
-                Condition:{" "}
+                <span className="text-black font-medium">Condition:</span>{" "}
                 {data.condition}
               </li>
             )}
-            <li className="text-black my-1">Location: {data.location}</li>
-            <li className="text-black my-1">Zipcode: {data.zipcode}</li>
+            <li className="text-black my-1"><span className="text-black font-medium">Location: </span>{data.location}</li>
+            <li className="text-black my-1"><span className="text-black font-medium">Zipcode: </span>{data.zipcode}</li>
           </ul>
         </div>
         {data.postType === "ask" && (
           <ul className="block sm:pl-5 pt-0 pl-4 sm:pt-2">
             <li className="text-black">
-              Specifically Asked For: {data.specify}
+              <span className="text-black font-medium">Specifically Asked For: </span>{data.specify}
             </li>
           </ul>
         )}
@@ -180,7 +180,7 @@ const AccountSupplyObjectCard = ({ data, modalDispatch }) => {
           <div className="pt-0 sm:pt-2 sm:pl-5 pl-4 block">
             <ul>
               <li className="text-black">
-                Description: {data.description}
+                <span className="text-black font-medium">Description: </span>{data.description}
               </li>
             </ul>
           </div>

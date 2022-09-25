@@ -161,7 +161,7 @@ const FilterFormAsked = ({ handleFilterForm, handlePostFailure }) => {
             type="text"
             name="location"
           >
-            <option value="">Somewhere City</option>
+            <option value="">Select Neighborhood</option>
             <option value="Rogers Park">Rogers Park</option>
             <option value="West Ridge">West Ridge</option>
             <option value="Uptown">Uptown</option>
@@ -240,7 +240,7 @@ const FilterFormAsked = ({ handleFilterForm, handlePostFailure }) => {
             <option value="East Side">East Side</option>
             <option value="West Pullman">West Pullman</option>
             <option value="Riverdale">Riverdale</option>
-            <option value="Hegewisch">Hegewisch (Hegewisch)</option>
+            <option value="Hegewisch">Hegewisch</option>
           </select>
         </div>
         <div className="flex flex-col  items-center justify-around w-3/4 lg:w-fit">
@@ -272,7 +272,7 @@ const FilterFormAsked = ({ handleFilterForm, handlePostFailure }) => {
             maxLength="5"
             name="zipcode"
           >
-            <option value="">12345</option>
+            <option value="">Select ZIP Code</option>
             <option value="60290">60290</option>
             <option value="60601">60601</option>
             <option value="60602">60602</option>

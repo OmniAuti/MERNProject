@@ -195,7 +195,7 @@ const SingleItemFocusModal = ({
       {modalLoaded ? (
         <div className="z-50 shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div
-            className="h-fit p-2 sm:p-5 pt-2 w-screen sm:w-[500px] bg-white rounded-sm relative"
+            className="h-fit p-2 w-screen sm:w-[500px] bg-white rounded-sm relative"
             style={{ border: `3px solid ${cardBgColor}` }}
           >
             <p className="text-black text-center mb-3 underline">
@@ -203,7 +203,7 @@ const SingleItemFocusModal = ({
                 ? "Offered Supplies"
                 : "Asked For Supplies"}
             </p>
-            <div className="relative w-full h-fit min-h-[400px] rounded-md overflow-hidden py-2">
+            <div className="relative w-full h-fit min-h-[400px] rounded-md overflow-hidden">
               <div className="h-52 max-h-52 min-h-52 w-full relative overflow-hidden">
                 <div className="bg-black bg-opacity-80 w-fit absolute pr-10 pt-5 pb-24 -bottom-20 pl-40 -left-36 rounded-full text-2xl font-light">
                   {data.type.slice(0, 1).toUpperCase() + data.type.slice(1)}
@@ -226,30 +226,30 @@ const SingleItemFocusModal = ({
                   />
                 )}
               </div>
-              {data.postType === "ask" ? (
-                <p className="text-black m-5 mb-0 font-light max-w-[80%]">
-                  {" "}
-                  <span className=" text-black font-medium ">
-                    Specifically Asked For:{" "}
-                  </span>
-                  {data.specify}
-                </p>
-              ) : (
-                <p className="text-black m-5 font-light max-w-[80%]">
-                  {" "}
-                  <span className=" text-black font-medium ">
-                    Description:{" "}
-                  </span>
-                  {data.description}
-                </p>
-              )}
-
-              <ul className="mt-5 ml-2 px-2">
+              <ul className="p-2 shadow-inner flex flex-col justify-between rounded-tr-sm rounded-b-sm h-[192px]">
+                {data.postType === "ask" ? (
+                  <li className="text-black font-light max-w-[80%]">
+                    {" "}
+                    <span className=" text-black font-medium ">
+                      Specifically Asked For:{" "}
+                    </span>
+                    {data.specify}
+                  </li>
+                ) : (
+                  <li className="text-black font-light max-w-[80%]">
+                    {" "}
+                    <span className=" text-black font-medium ">
+                      Description:{" "}
+                    </span>
+                    {data.description}
+                  </li>
+                )}
+                <hr></hr>
                 <li className="text-black m-1 mt-2 font-medium">
                   Quantity:{" "}
                   <span className="text-black font-light">{data.quantity}</span>
                 </li>
-
+                <hr></hr>
                 {data.postType === "ask" ? (
                   <li className="text-black m-1 mt-2 font-medium">
                     Accepted Condition:{" "}
@@ -267,7 +267,7 @@ const SingleItemFocusModal = ({
                     </span>{" "}
                   </li>
                 )}
-
+                <hr></hr>
                 <li className="text-black m-1 mt-2 font-medium">
                   General Location:{" "}
                   <span className="text-black font-light">
@@ -275,17 +275,19 @@ const SingleItemFocusModal = ({
                       data.location.slice(1)}
                   </span>
                 </li>
+                <hr></hr>
 
                 <li className="text-black m-1 mt-2 font-medium">
                   Zipcode:{" "}
                   <span className="text-black font-light">{data.zipcode}</span>
                 </li>
+                <hr></hr>
               </ul>
 
               {!logInCheck && (
                 <div
                   onClick={() => handleBookmark()}
-                  className="h-12 absolute rounded-full w-12 top-1/2 -right-1 cursor-pointer hover:scale-105"
+                  className="h-14 absolute rounded-full w-14 top-1/2 -right-[6.5px] cursor-pointer hover:scale-105 hover:-right-[5.5px]"
                 >
                   {bookmarkCheck ? (
                     <img
@@ -306,8 +308,13 @@ const SingleItemFocusModal = ({
 
             {!logInCheck ? (
               <>
-                <button disabled={user.emailVerified === true ? false : true} className="bg-sky-500 w-full h-10 my-2 disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer rounded-sm hover:bg-sky-900">
-                  {user.emailVerified === true ? 'Inquire' : 'Please Verify Your Email'}
+                <button
+                  disabled={user.emailVerified === true ? false : true}
+                  className="bg-sky-500 w-full h-10 my-2 disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer rounded-sm hover:bg-sky-900"
+                >
+                  {user.emailVerified === true
+                    ? "Inquire"
+                    : "Please Verify Your Email"}
                 </button>
                 <button
                   onClick={() => handleCloseModal()}

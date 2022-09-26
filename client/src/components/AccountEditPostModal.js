@@ -143,7 +143,7 @@ const AccountEditPostModal = ({
       {modalLoaded ? (
         <div className="z-50 shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div
-            className="h-fit max-h-screen overflow-scroll w-screen sm:w-[500px] bg-white p-5 rounded-md relative text-center"
+            className="h-fit max-h-screen overflow-scroll w-screen sm:w-[500px] bg-white px-2 py-2 rounded-md relative text-center"
             style={{ border: `3px solid ${cardBgColor}` }}
           >
             {editSaved ? (

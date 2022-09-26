@@ -162,7 +162,7 @@ const SupplyObjectCard = ({ data, modalDispatch }) => {
           )}
         </div>
         <ul className="flex flex-col justify-around shadow-inner group-hover:shadow-transparent transition-all duration-500">
-          <div className="flex items-center justify-between w-full px-8">
+          <div className="flex items-center justify-between px-8">
             <li className="text-black m-1 mb-0 inline-block truncate ">
               <span className="text-black font-medium w-full">Location: </span>
               {data.location}
@@ -172,7 +172,10 @@ const SupplyObjectCard = ({ data, modalDispatch }) => {
               {data.zipcode}
             </li>
           </div>
-          <hr></hr>
+          <div className="px-1">
+            {" "}
+            <hr></hr>
+          </div>
           <div className="flex items-center justify-around">
             <li className="text-black m-1 mt-0 font-medium inline-block max-w-[140px] w-[125px] truncate">
               Quantity:{" "}
@@ -200,13 +203,10 @@ const SupplyObjectCard = ({ data, modalDispatch }) => {
           </div>
           <hr></hr>
         </ul>
-        <button
-          className="p-[6px] group-hover:text-white text-black group-hover:shadow-[0_2px_3px_3px_rgba(0,0,0,.5)] bg-slate-300 group-hover:bg-slate-400 absolute w-full left-1/2 -translate-x-1/2 bottom-0 rounded-b-md font-base transition-all duration-500"
-        >
+        <button className="p-[6px] group-hover:text-white text-black group-hover:shadow-[0_2px_3px_3px_rgba(0,0,0,.5)] bg-slate-300 group-hover:bg-slate-400 absolute w-full left-1/2 -translate-x-1/2 bottom-0 rounded-b-md font-base transition-all duration-500">
           Details
         </button>
       </div>
-     
     </div>
   );
 };

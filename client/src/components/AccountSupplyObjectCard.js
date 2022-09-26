@@ -151,10 +151,10 @@ const AccountSupplyObjectCard = ({ data, modalDispatch }) => {
               />
             )}
           </div>
-          <ul className="w-full sm:w-1/2 pl-2 sm:h-full max-h-52 flex flex-col justify-center sm:justify-around ">
+          <ul className="w-full sm:w-1/2 pl-2 sm:h-full max-h-52 flex flex-col justify-center sm:justify-around">
             {data.postType === "ask" && (
               <>
-                <li className="text-black my-1">
+                <li className="text-black my-1 pl-2">
                   <span className="text-black font-medium">Who: </span>
                   {data.who}
                 </li>
@@ -162,7 +162,7 @@ const AccountSupplyObjectCard = ({ data, modalDispatch }) => {
               </>
             )}
 
-            <li className="text-black my-1 ">
+            <li className="text-black my-1 pl-2">
               <span className="text-black font-medium">Quantity: </span>
               {data.quantity}
             </li>
@@ -170,7 +170,7 @@ const AccountSupplyObjectCard = ({ data, modalDispatch }) => {
 
             {data.postType === "ask" ? (
               <>
-                <li className="text-black my-1">
+                <li className="text-black my-1 pl-2">
                   <span className="text-black font-medium">
                     Accepted Condition:
                   </span>{" "}
@@ -182,20 +182,20 @@ const AccountSupplyObjectCard = ({ data, modalDispatch }) => {
               </>
             ) : (
               <>
-                <li className="text-black my-1">
+                <li className="text-black my-1 pl-2">
                   <span className="text-black font-medium">Condition:</span>{" "}
                   {data.condition}
                 </li>
                 <hr></hr>
               </>
             )}
-            <li className="text-black my-1">
+            <li className="text-black my-1 pl-2">
               <span className="text-black font-medium">Location: </span>
               {data.location}
             </li>
             <hr></hr>
 
-            <li className="text-black my-1">
+            <li className="text-black my-1 pl-2">
               <span className="text-black font-medium">Zipcode: </span>
               {data.zipcode}
             </li>

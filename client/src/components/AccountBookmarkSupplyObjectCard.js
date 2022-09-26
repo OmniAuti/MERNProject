@@ -161,12 +161,12 @@ const AccountBookmarkSupplyObjectCard = ({ data, modalDispatch }) => {
             )}
           </div>
           <ul className="w-2/3 pl-3 sm:pl-0 max-h-52 flex flex-col justify-center sm:justify-around">
-            <li className="text-black my-1"><span className="text-black font-medium">Quantity: </span>{data.quantity}</li>
+            <li className="text-black my-1 pl-2"><span className="text-black font-medium">Quantity: </span>{data.quantity}</li>
             <hr></hr>
             {data.postType === "offer" ? (
-              <li className="text-black my-1"><span className="text-black font-medium">Condition: </span>{data.condition}</li>
+              <li className="text-black my-1 pl-2"><span className="text-black font-medium">Condition: </span>{data.condition}</li>
             ) : (
-              <li className="text-black my-1">
+              <li className="text-black my-1 pl-2">
                 <span className="text-black font-medium">Accepted Condition:</span>{" "}
                 {data.condition
                   .join("")
@@ -174,9 +174,9 @@ const AccountBookmarkSupplyObjectCard = ({ data, modalDispatch }) => {
               </li>
             )}
             <hr></hr>
-            <li className="text-black my-1 "><span className="text-black font-medium">Location: </span>{data.location}</li>
+            <li className="text-black my-1 pl-2"><span className="text-black font-medium">Location: </span>{data.location}</li>
             <hr></hr>
-            <li className="text-black my-1"><span className="text-black font-medium">Zipcode: </span>{data.zipcode}</li>
+            <li className="text-black my-1 pl-2"><span className="text-black font-medium">Zipcode: </span>{data.zipcode}</li>
           <hr></hr>
           </ul>
         </div>

@@ -122,65 +122,102 @@ const AccountSupplyObjectCard = ({ data, modalDispatch }) => {
 
   return (
     <div
-      className=" w-full sm:rounded-md sm:my-1 sm:mx-[12px]"
-      style={{ backgroundColor: cardBgColor }}
+      className=" w-full sm:rounded-md my-1 sm:mx-[12px] shadow-lg p-1"
+      style={{ backgroundColor:cardBgColor}}
     >
       <div className="flex justify-around flex-col bg-white w-full h-full pb-2 rounded-md relative overflow-hidden">
-        <div className="flex flex-col sm:flex-row justify-around w-full p-2 pb-1 sm:p-5">
+        <div className="flex flex-col sm:flex-row justify-around w-full p-2 pb-1 sm:p-5 sm:px-2 sm:pb-2">
           <div className="relative overflow-hidden">
-              <div className="bg-black bg-opacity-80 w-fit absolute pr-10 pt-1 pb-20 -bottom-24 pl-40 -left-36 rounded-full text-3xl font-light">
-                  <p className="mb-5 -ml-2">
-                    {data.type.slice(0, 1).toUpperCase() + data.type.slice(1)}
-                  </p>
-              </div>
-              {data.postType === 'offer' ? <img
-                  className="h-52 max-h-52 min-h-52 w-full object-contain object-center"
-                  src={
-                    data.photoInfo.url !== ""
-                      ? data.photoInfo.url
-                      : "./imgs/missing-file.svg"
-                  }
-                  alt="Supply Item Picture"
-                /> : <img
+            <div className="bg-black bg-opacity-80 w-fit absolute pr-10 pt-1 pb-20 -bottom-24 pl-40 -left-36 rounded-full text-3xl font-light">
+              <p className="mb-5 -ml-2">
+                {data.type.slice(0, 1).toUpperCase() + data.type.slice(1)}
+              </p>
+            </div>
+            {data.postType === "offer" ? (
+              <img
+                className="h-52 max-h-52 min-h-52 w-full object-contain object-center"
+                src={
+                  data.photoInfo.url !== ""
+                    ? data.photoInfo.url
+                    : "./imgs/missing-file.svg"
+                }
+                alt="Supply Item Picture"
+              />
+            ) : (
+              <img
                 className="h-52 max-h-52 min-h-52 w-full object-contain object-center"
                 src={askIcon}
                 alt="Ask Item Icon"
-              />}
+              />
+            )}
           </div>
-          <ul className="w-full sm:w-1/2 pl-2 sm:h-full max-h-52 flex flex-col justify-center sm:justify-around">
+          <ul className="w-full sm:w-1/2 pl-2 sm:h-full max-h-52 flex flex-col justify-center sm:justify-around ">
             {data.postType === "ask" && (
-              <li className="text-black my-1"><span className="text-black font-medium">Who: </span>{data.who}</li>
+              <>
+                <li className="text-black my-1">
+                  <span className="text-black font-medium">Who: </span>
+                  {data.who}
+                </li>
+                <hr></hr>
+              </>
             )}
-            <li className="text-black my-1 "><span className="text-black font-medium">Quantity: </span>{data.quantity}</li>
+
+            <li className="text-black my-1 ">
+              <span className="text-black font-medium">Quantity: </span>
+              {data.quantity}
+            </li>
+            <hr></hr>
+
             {data.postType === "ask" ? (
-              <li className="text-black my-1">
-                <span className="text-black font-medium">Accepted Condition:</span>{" "}
-                {data.condition
-                  .join("")
-                  .slice(0, data.condition.join("").length - 2)}
-              </li>
+              <>
+                <li className="text-black my-1">
+                  <span className="text-black font-medium">
+                    Accepted Condition:
+                  </span>{" "}
+                  {data.condition
+                    .join("")
+                    .slice(0, data.condition.join("").length - 2)}
+                </li>
+                <hr></hr>
+              </>
             ) : (
-              <li className="text-black my-1">
-                <span className="text-black font-medium">Condition:</span>{" "}
-                {data.condition}
-              </li>
+              <>
+                <li className="text-black my-1">
+                  <span className="text-black font-medium">Condition:</span>{" "}
+                  {data.condition}
+                </li>
+                <hr></hr>
+              </>
             )}
-            <li className="text-black my-1"><span className="text-black font-medium">Location: </span>{data.location}</li>
-            <li className="text-black my-1"><span className="text-black font-medium">Zipcode: </span>{data.zipcode}</li>
+            <li className="text-black my-1">
+              <span className="text-black font-medium">Location: </span>
+              {data.location}
+            </li>
+            <hr></hr>
+
+            <li className="text-black my-1">
+              <span className="text-black font-medium">Zipcode: </span>
+              {data.zipcode}
+            </li>
+            <hr></hr>
           </ul>
         </div>
         {data.postType === "ask" && (
-          <ul className="block sm:pl-5 pt-0 pl-4 sm:pt-2">
+          <ul className="block sm:pl-5 pt-0 pl-4 sm:pt-0">
             <li className="text-black">
-              <span className="text-black font-medium">Specifically Asked For: </span>{data.specify}
+              <span className="text-black font-medium">
+                Specifically Asked For:{" "}
+              </span>
+              {data.specify}
             </li>
           </ul>
         )}
         {data.postType === "offer" && (
-          <div className="pt-0 sm:pt-2 sm:pl-5 pl-4 block">
+          <div className="pt-0 sm:pt-0 sm:pl-5 pl-4 block">
             <ul>
               <li className="text-black">
-                <span className="text-black font-medium">Description: </span>{data.description}
+                <span className="text-black font-medium">Description: </span>
+                {data.description}
               </li>
             </ul>
           </div>
@@ -203,13 +240,17 @@ const AccountSupplyObjectCard = ({ data, modalDispatch }) => {
         </button>
         <button
           onClick={() => {
-          {data.postType === 'offer' ? modalDispatch({
-              type: "DELETE_SINGLE_POST",
-              payload: [data._id, data.postType, data.photoInfo],
-            }) : modalDispatch({
-              type: "DELETE_SINGLE_POST",
-              payload: [data._id, data.postType],
-            })}
+            {
+              data.postType === "offer"
+                ? modalDispatch({
+                    type: "DELETE_SINGLE_POST",
+                    payload: [data._id, data.postType, data.photoInfo],
+                  })
+                : modalDispatch({
+                    type: "DELETE_SINGLE_POST",
+                    payload: [data._id, data.postType],
+                  });
+            }
           }}
           className="bg-white hidden sm:block border text-center cursor-pointer absolute -right-2 -bottom-2 py-2 pl-1 pr-3 hover:shadow-[-1px_-4px_15px_-3px_rgb(0,0,0,0.1),-1px_-3px_6px_-4px_rgb(0,0,0,0.1)] rounded-lg"
         >
@@ -221,13 +262,17 @@ const AccountSupplyObjectCard = ({ data, modalDispatch }) => {
         </button>
         <button
           onClick={() => {
-          {data.postType === 'offer' ? modalDispatch({
-              type: "DELETE_SINGLE_POST",
-              payload: [data._id, data.postType, data.photoInfo],
-            }) : modalDispatch({
-              type: "DELETE_SINGLE_POST",
-              payload: [data._id, data.postType],
-            })}
+            {
+              data.postType === "offer"
+                ? modalDispatch({
+                    type: "DELETE_SINGLE_POST",
+                    payload: [data._id, data.postType, data.photoInfo],
+                  })
+                : modalDispatch({
+                    type: "DELETE_SINGLE_POST",
+                    payload: [data._id, data.postType],
+                  });
+            }
           }}
           className="bg-white sm:hidden text-center border cursor-pointer absolute -left-2 -top-2 py-2 pl-2 pr-1 sm:pr-3 hover:shadow-[1px_4px_15px_0px_rgb(0,0,0,0.1),-1px_-3px_6px_-10px_rgb(0,0,0,0.1)] rounded-lg"
         >

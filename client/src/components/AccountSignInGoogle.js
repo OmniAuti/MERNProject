@@ -16,7 +16,7 @@ function AccountSignInGoogle(props) {
       privacyPolicyUrl: "/privacy-policy",
     });
   }, [props.auth]);
-  return <div className="bg-white w-screen sm:w-96" id="firebaseCont"></div>;
+  return <div className="bg-white w-screen sm:w-96 sm:rounded-b-md" id="firebaseCont"></div>;
 }
 
 export default AccountSignInGoogle;

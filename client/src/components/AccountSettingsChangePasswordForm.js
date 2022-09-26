@@ -75,7 +75,7 @@ const AccountSettingsChangePasswordForm = ({
         value={confirmOldPassword}
       />{" "}
       <input
-        className="bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:bg-sky-900 cursor-pointer"
+        className="bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:text-white hover:bg-sky-600 cursor-pointer"
         type="submit"
         value="Submit Changes"
       />

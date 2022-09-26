@@ -75,8 +75,8 @@ const AccountSettingsDeleteUserForm = ({ handleSettingsChangeSubmit }) => {
         <input
           className={
             user.providerData[0].providerId !== "password"
-              ? "bg-sky-500 w-full h-10 my-2 mt-10 text-black rounded-sm hover:bg-sky-900 cursor-pointer"
-              : "bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:bg-sky-900 cursor-pointer"
+              ? "bg-sky-500 w-full h-10 my-2 mt-10 text-black hover:text-white rounded-sm hover:bg-sky-600 cursor-pointer"
+              : "bg-sky-500 w-full h-10 my-2 text-black hover:text-white rounded-sm hover:bg-sky-600 cursor-pointer"
           }
           type="submit"
           value="Delete Account"

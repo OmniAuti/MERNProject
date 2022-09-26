@@ -51,7 +51,7 @@ const Borrow = ({ modalDispatch, handlePostFailure }) => {
       <div
         className={
           activeFilter
-            ? "bg-sky-900 w-screen -ml-5 sm:-ml-0 sm:w-full  transition-all overflow-hidden rounded-sm pb-5"
+            ? "bg-sky-900 w-screen -ml-5 sm:-ml-0 sm:w-full  transition-all overflow-hidden rounded-md pb-5"
             : "h-0 transition-all overflow-hidden"
         }
       >

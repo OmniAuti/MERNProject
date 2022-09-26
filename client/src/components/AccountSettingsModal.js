@@ -89,7 +89,7 @@ const AccountSettingsModal = ({
 
                 <button
                   onClick={() => settingsDispatch({ type: "CLOSE" })}
-                  className="w-full h-10 bg-gray-400 rounded-sm rounded-bl-sm hover:bg-gray-700"
+                  className="w-full h-10 bg-slate-300 rounded-sm rounded-bl-sm  hover:bg-slate-400"
                 >
                   Close
                 </button>

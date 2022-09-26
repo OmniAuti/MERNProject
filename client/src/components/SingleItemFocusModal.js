@@ -195,7 +195,7 @@ const SingleItemFocusModal = ({
       {modalLoaded ? (
         <div className="z-50 shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <div
-            className="h-fit p-2 w-screen sm:w-[500px] bg-white rounded-sm relative"
+            className="h-fit p-2 w-screen sm:w-[500px] bg-white rounded-md relative"
             style={{ border: `3px solid ${cardBgColor}` }}
           >
             <p className="text-black text-center mb-3 underline">
@@ -310,7 +310,7 @@ const SingleItemFocusModal = ({
               <>
                 <button
                   disabled={user.emailVerified === true ? false : true}
-                  className="bg-sky-500 w-full h-10 my-2 disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer rounded-sm hover:bg-sky-900"
+                  className="bg-sky-500 w-full h-10 my-2 disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer rounded-sm hover:bg-sky-600"
                 >
                   {user.emailVerified === true
                     ? "Inquire"
@@ -318,7 +318,7 @@ const SingleItemFocusModal = ({
                 </button>
                 <button
                   onClick={() => handleCloseModal()}
-                  className="w-full h-10 bg-gray-400 rounded-sm rounded-bl-sm hover:bg-gray-700"
+                  className="w-full h-10 bg-slate-300 rounded-sm rounded-bl-sm hover:bg-slate-400"
                 >
                   Close
                 </button>
@@ -326,13 +326,13 @@ const SingleItemFocusModal = ({
             ) : (
               <>
                 <Link to="account-gateway">
-                  <p className="flex items-center justify-center bg-sky-500 w-full my-2 h-10 rounded-sm hover:bg-sky-900">
+                  <p className="flex items-center justify-center bg-sky-300 w-full my-2 h-10 rounded-sm hover:bg-sky-400">
                     Please Log In For More Details
                   </p>
                 </Link>
                 <button
                   onClick={() => handleCloseModal()}
-                  className="w-full h-10 bg-gray-400 rounded-sm rounded-bl-sm hover:bg-gray-700"
+                  className="w-full h-10 bg-slate-300 rounded-sm rounded-bl-sm hover:bg-slate-400"
                 >
                   Close
                 </button>

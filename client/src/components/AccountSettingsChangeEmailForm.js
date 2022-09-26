@@ -38,7 +38,7 @@ const AccountSettingsChangeEmailForm = ({ handleSettingsChangeSubmit }) => {
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
       <input
-        className="bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:bg-sky-900 cursor-pointer"
+        className="bg-sky-500 w-full h-10 my-2 text-black rounded-sm hover:bg-sky-600 hover:text-white cursor-pointer"
         type="submit"
         value="Submit Changes"
       />

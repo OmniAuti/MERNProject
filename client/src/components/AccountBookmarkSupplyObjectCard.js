@@ -128,7 +128,7 @@ const AccountBookmarkSupplyObjectCard = ({ data, modalDispatch }) => {
       className=" w-full sm:rounded-md sm:my-1 sm:mx-[12px] p-1 cursor-pointer"
       style={{ backgroundColor: cardBgColor }}
     >
-      <div className="flex justify-around flex-col bg-white w-full h-full pb-2 rounded-md shadow-inner transition-all hover:shadow-black outline">
+      <div className="flex justify-around flex-col bg-white w-full h-full pb-2 rounded-sm shadow-inner transition-all hover:shadow-black">
         <p className="text-black text-center mt-1 underline">
           {data.postType === "offer"
             ? "Offered Supplies"
@@ -160,8 +160,9 @@ const AccountBookmarkSupplyObjectCard = ({ data, modalDispatch }) => {
               />
             )}
           </div>
-          <ul className="w-1/2 pl-3 sm:pl-5 max-h-52 flex flex-col justify-center sm:justify-around">
+          <ul className="w-2/3 pl-3 sm:pl-0 max-h-52 flex flex-col justify-center sm:justify-around">
             <li className="text-black my-1"><span className="text-black font-medium">Quantity: </span>{data.quantity}</li>
+            <hr></hr>
             {data.postType === "offer" ? (
               <li className="text-black my-1"><span className="text-black font-medium">Condition: </span>{data.condition}</li>
             ) : (
@@ -172,8 +173,11 @@ const AccountBookmarkSupplyObjectCard = ({ data, modalDispatch }) => {
                   .slice(0, data.condition.join("").length - 2)}
               </li>
             )}
+            <hr></hr>
             <li className="text-black my-1 "><span className="text-black font-medium">Location: </span>{data.location}</li>
+            <hr></hr>
             <li className="text-black my-1"><span className="text-black font-medium">Zipcode: </span>{data.zipcode}</li>
+          <hr></hr>
           </ul>
         </div>
         <div className="pl-3 sm:px-5">

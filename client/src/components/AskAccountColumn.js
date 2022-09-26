@@ -3,7 +3,7 @@ import AccountSupplyLoading from "./AccountSupplyLoading";
 
 const AskAccountColumn = ({ accountAskedData, isAskLoaded, modalDispatch, errorPlaceholder }) => {
   return (
-    <div className="w-screen -ml-5 sm:-ml-0 sm:w-full mb-10 lg:w-1/2 max-h-[750px] h-[750px] min-h-[750px]  bg-slate-400 rounded-sm overflow-scroll">
+    <div className="w-screen -ml-5 sm:-ml-0 sm:w-full mb-10 lg:w-1/2 max-h-[750px] h-[750px] min-h-[750px]  bg-slate-400 rounded-md overflow-scroll">
       <p className="w-full z-40 text-3xl underline text-center py-2 sticky top-0 bg-slate-400">
         Your Currently Asked For
       </p>

@@ -205,7 +205,6 @@ const ModalEditAsk = ({
             onChange={(e) => setAskObj({ ...askObj, specify: e.target.value })}
             placeholder="This is for . . ."
           />
-          <hr className="mt-2"></hr>
           <p className=" text-black my-2 font-medium">
             Currently Asked For Condition: {data.condition.join("")
                   .slice(0, data.condition.join("").length - 2)}
@@ -238,6 +237,8 @@ const ModalEditAsk = ({
               );
             })}
           </div>
+          <hr className="mb-2"></hr>
+
           <label htmlFor="location" className=" text-black font-medium">
             General Location
           </label>
@@ -462,7 +463,7 @@ const ModalEditAsk = ({
           <input
             value="Save Changes"
             type="submit"
-            className="bg-sky-500 w-full h-10 my-2 rounded-sm hover:bg-sky-900 cursor-pointer"
+            className="bg-sky-500 w-full h-10 my-2 rounded-sm hover:bg-sky-600 hover:text-white cursor-pointer"
           />
         </form>
       )}

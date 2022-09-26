@@ -64,7 +64,7 @@ const DeleteSinglePostModal = ({
     >
       {deletionFailure ? (
         <div className="bg-[0,0,0,0.5] absolute w-full h-full flex items-center justify-center z-50">
-          <div className="h-fit p-3 w-screen -ml-5 sm:w-[400px] sm:mx-auto bg-white rounded-sm ">
+          <div className="h-fit p-3 w-screen -ml-5 sm:w-[400px] sm:mx-auto bg-white sm:rounded-md ">
             <div className="relative w-full h-fit rounded-md overflow-hidden py-2">
               <img
                 className="w-[150px] mx-auto my-10"
@@ -78,7 +78,7 @@ const DeleteSinglePostModal = ({
               </p>
               <button
                 onClick={handlePostFailureClose}
-                className="w-full h-10 bg-gray-400 rounded-sm rounded-bl-sm hover:bg-gray-700"
+                className="w-full h-10 bg-gray-400 rounded-sm rounded-bl-sm hover:bg-gray-500"
               >
                 Close
               </button>
@@ -86,7 +86,7 @@ const DeleteSinglePostModal = ({
           </div>
         </div>
       ) : (
-        <div className="z-50 shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white">
+        <div className="z-50 sm:rounded-md shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white">
           {deletionSuccess ? (
             <div className="relative w-fit px-10 min-w-fit h-fit rounded-md overflow-hidden py-2">
               <img
@@ -99,7 +99,7 @@ const DeleteSinglePostModal = ({
               </p>
               <button
                 onClick={() => handleCloseModal()}
-                className="w-full h-10 bg-gray-400 rounded-sm rounded-bl-sm mb-2 hover:bg-gray-700"
+                className="w-full h-10 bg-gray-400 rounded-sm rounded-bl-sm mb-2 hover:bg-gray-500"
               >
                 Close
               </button>
@@ -113,7 +113,7 @@ const DeleteSinglePostModal = ({
                   fontColor={"text-black"}
                 />
               ) : (
-                <div className="h-fit p-5 w-screen sm:w-[500px] bg-white rounded-sm relative">
+                <div className="h-fit p-5 w-screen sm:w-[500px] bg-white sm:rounded-md relative">
                   <div className="relative w-full h-fit rounded-md overflow-hidden py-2">
                     <p className="text-black text-center text-xl">
                       Are you sure you want to delete this post?

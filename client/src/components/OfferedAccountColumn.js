@@ -8,7 +8,7 @@ const OfferedAccountColumn = ({
   errorPlaceholder,
 }) => {
   return (
-    <div className="w-screen -ml-5 sm:-ml-0 sm:w-full mb-10 lg:w-1/2 bg-slate-400 max-h-[750px] h-[750px] min-h-[750px] rounded-sm overflow-scroll">
+    <div className="w-screen -ml-5 sm:-ml-0 sm:w-full mb-10 lg:w-1/2 bg-slate-400 max-h-[750px] h-[750px] min-h-[750px] rounded-md overflow-scroll">
       <p className="w-full text-3xl underline text-center py-2 z-40 sticky top-0 bg-slate-400">
         Your Currently Offered
       </p>

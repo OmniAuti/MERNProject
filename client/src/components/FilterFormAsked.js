@@ -362,12 +362,12 @@ const FilterFormAsked = ({ handleFilterForm, handlePostFailure }) => {
         </div>
       </div>
       <div className="w-full flex flex-col lg:flex-row items-center justify-around">
-        <button className="text-white text-center border py-3 mt-7 mx-auto min-w-[200px] rounded-sm w-2/5">
+        <button className="text-white hover:text-sky-900 hover:bg-white transition-colors text-center border py-3 mt-7 mx-auto min-w-[200px] rounded-sm w-2/5">
           Filter Supplies
         </button>
         <input
           onClick={(e) => handleReset(e)}
-          className="text-white text-center border py-3 mt-7 mx-auto rounded-sm w-2/5 min-w-[200px] cursor-pointer"
+          className="text-white  hover:text-sky-900 hover:bg-white transition-colors text-center border py-3 mt-7 mx-auto rounded-sm w-2/5 min-w-[200px] cursor-pointer"
           type="reset"
           value="Clear Filters"
         />

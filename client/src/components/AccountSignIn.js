@@ -57,7 +57,7 @@ const AccountSignIn = ({ handleActiveSignIn, activeSignUp }) => {
         {activeSignUp ? (
           <button
             onClick={handleActiveSignIn}
-            className="text-black underline underline-offset-0 text-center w-full"
+            className="text-black underline underline-offset-1 text-center w-full"
           >
             Already Have An Account? Sign In Here
           </button>

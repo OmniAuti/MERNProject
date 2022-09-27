@@ -82,7 +82,6 @@ const AccountSettings = () => {
       handleError(e, true);
     }
   };
-  console.log(user);
   return (
     <section className="pt-10">
       <p className="text-5xl underline underline-offset-3 text-center mb-10 font-light">

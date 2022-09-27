@@ -162,27 +162,14 @@ const SupplyObjectCard = ({ data, modalDispatch }) => {
           )}
         </div>
         <ul className="flex flex-col justify-around shadow-inner group-hover:shadow-transparent transition-all duration-500">
-          <div className="flex items-center justify-between px-8">
-            <li className="text-black m-1 mb-0 inline-block truncate ">
-              <span className="text-black font-medium w-full">Location: </span>
-              {data.location}
-            </li>
-            <li className="text-black m-1  mb-0 inline-block truncate">
-              <span className="text-black font-medium w-full">Zipcode: </span>
-              {data.zipcode}
-            </li>
-          </div>
-          <div className="px-1">
-            {" "}
-            <hr></hr>
-          </div>
-          <div className="flex items-center justify-around">
-            <li className="text-black m-1 mt-0 font-medium inline-block max-w-[140px] w-[125px] truncate">
+
+          <div className="flex items-center">
+            <li className="text-black mb-1 mt-0 font-medium text-center inline-block w-1/2 truncate">
               Quantity:{" "}
               <span className="text-black font-light">{data.quantity}</span>
             </li>
             {data.postType === "ask" ? (
-              <li className="text-black m-1 mt-0 font-medium inline-block truncate ">
+              <li className="text-black mb-1 mt-0 font-medium w-1/2 inline-block truncate ">
                 Accepted Condition:{" "}
                 <span className="text-black font-light">
                   {" "}
@@ -192,7 +179,7 @@ const SupplyObjectCard = ({ data, modalDispatch }) => {
                 </span>{" "}
               </li>
             ) : (
-              <li className="text-black m-1 mt-0 font-medium inline-block truncate ">
+              <li className="text-black mb-1 mt-0 font-medium inline-block truncate ">
                 Condition:{" "}
                 <span className="text-black font-light bg">
                   {" "}
@@ -200,6 +187,19 @@ const SupplyObjectCard = ({ data, modalDispatch }) => {
                 </span>{" "}
               </li>
             )}
+          </div>
+          <div className="px-1">
+            {" "}
+            <hr></hr>
+          </div>
+          <div className="flex items-center">
+            <li className="text-black m-1 mb-0 inline-block truncate font-medium w-1/2 text-center">
+              Location:
+              <span className="text-black font-light"> {data.location}</span>
+            </li>
+            <li className="text-black m-1 font-medium w-1/2 mb-0 inline-block truncate text-center">
+              Zipcode: <span className="text-black font-light">{data.zipcode}</span>
+            </li>
           </div>
           <hr></hr>
         </ul>

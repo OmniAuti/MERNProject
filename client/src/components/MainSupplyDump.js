@@ -29,7 +29,7 @@ const MainSupplyDump = ({ modalDispatch }) => {
   }, [dumpData]);
 
   return (
-    <section className="mt-24  mb-0 w-screen -ml-5 h-full overflow-hidden px-5 bg-sky-900">
+    <section className="mt-24 mb-0 w-screen -ml-5 h-full overflow-hidden sm:px-5 bg-sky-900">
       <h3 className="text-center text-3xl mt-4 font-light underline underline-offset-2">
         Available Supplies
       </h3>

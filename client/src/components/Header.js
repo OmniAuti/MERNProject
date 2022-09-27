@@ -34,7 +34,7 @@ const Header = () => {
             alt="Borrow A Pencil Logo"
             src="./imgs/logo.svg"
           />{" "}
-          <h2 className="transition-opacity text-xl ml-2 sm:ml-5 before:absolute before:w-0 before:bg-white before:transition-[width] before:opacity-0 group-hover:before:opacity-100 after:opacity-100 group-hover:after:opacity-0 before:duration-500 after:duration-500 before:origin-left before:left-0 after:origin-right after:h-[2px] after:w-0 group-hover:after:w-full after:bottom-0 after:right-0  after:transition-[width] after:absolute after:bg-white group-hover:before:w-full relative before:h-[2px] before:bottom-0 ">
+          <h2 className="whitespace-nowrap transition-opacity text-xl ml-2 sm:ml-5 before:absolute before:w-0 before:bg-white before:transition-[width] before:opacity-0 group-hover:before:opacity-100 after:opacity-100 group-hover:after:opacity-0 before:duration-500 after:duration-500 before:origin-left before:left-0 after:origin-right after:h-[2px] after:w-0 group-hover:after:w-full after:bottom-0 after:right-0  after:transition-[width] after:absolute after:bg-white group-hover:before:w-full relative before:h-[2px] before:bottom-0 ">
             Borrow A Pencil
           </h2>
         </Link>
@@ -208,14 +208,14 @@ const Header = () => {
               {location.pathname === "/dashboard" ? (
                 <div className=" bg-white rounded-full">
                   <img
-                    className="h-fit w-[30px]"
+                    className="h-fit max-h-[30px] w-[30px]"
                     src="/imgs/userDashboard.svg"
                     alt="Account Icon"
                   />
                 </div>
               ) : (
                 <img
-                  className="h-fit w-[30px]"
+                  className="h-fit max-h-[30px] w-[30px]"
                   src="/imgs/user.svg"
                   alt="Account Icon"
                 />

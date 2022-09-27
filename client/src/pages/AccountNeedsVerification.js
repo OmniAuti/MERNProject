@@ -24,7 +24,7 @@ useEffect(() => {
       ) : (
         <>
           {emailSent ? (
-            <div className="bg-white w-[500px] h-fit p-5 text-center rounded-md">
+            <div className="bg-white w-screen -ml-10 md:w-[500px] h-fit p-5 text-center rounded-md">
               <p className="text-black">Email Verification Sent.</p>
               <p className="text-black my-5">
                 Please check your email or spam folder and refresh your browser after verifying!
@@ -37,7 +37,7 @@ useEffect(() => {
               </Link>
             </div>
           ) : (
-            <div className="bg-white w-[500px] h-fit p-5 text-center rounded-md">
+            <div className="bg-white w-screen -ml-10 md:w-[500px] h-fit p-5 text-center rounded-md">
               <h2 className="text-black text-2xl">
                 You must verifiy your email before being able to offer, ask, or
                 contact someone about supplies.

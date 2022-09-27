@@ -21,7 +21,7 @@ const AccountSettingsModal = ({
       }
     >
       <div className="z-50 shadow-2xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="h-fit p-5 pt-0 pb-2 w-screen sm:w-[400px] bg-white rounded-tr-sm rounded-tl-sm relative">
+        <div className="h-fit p-5 pt-0 pb-2 w-screen sm:w-[400px] bg-white rounded-sm relative">
           <div className="relative w-full h-fit min-h-[300px] rounded-md overflow-hidden py-2">
             {editSuccess ? (
               <div>

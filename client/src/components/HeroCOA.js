@@ -87,7 +87,7 @@ const HeroCOA = () => {
 
   return (
     <section className="flex flex-col items-start md:flex-row md:justify-around min-h-screen overflow-hidden">
-      <div className="w-full min-h-screen flex flex-col justify-evenly sm:items-start lg:w-2/3 mr-0 lg:mr-5">
+      <div className="w-full min-h-screen flex flex-col justify-evenly sm:items-start lg:w-2/3 mr-0 lg:mr-5 -mt-[50px] sm:-mt-[0px]">
         <div className="lg:w-full w-fit pr-5 lg:pr-0 mx-auto sm:h-2/4 relative overflow-hidden pb-2">
           <h1
             id="h1-hero-xs"
@@ -123,14 +123,14 @@ const HeroCOA = () => {
           </h1>
         </div>
 
-        <div className="text-center lg:text-left">
+        <div className="text-center lg:text-left -mt-[50px] sm:-mt-[0px]">
           <p className="xl:w-3/4 lg:w-5/6 sm:mb-0 mt-0 text-center lg:text-left lg:pl-16 bg-black italic tracking-wide font-thin text-xl ">
             An easy and effortless community resource for those who are 
             struggling to get the supplies they need to succeed in school
           </p>
         </div>
 
-        <div className="mb-10 md:h-fit flex flex-col w-full sm:flex-row items-center justify-evenly lg:justify-start lg:pl-16">
+        <div className="mb-10 md:h-fit flex flex-col w-full sm:flex-row items-center justify-evenly lg:justify-start lg:pl-16 -mt-[50px] sm:-mt-[0px]">
           <Link
             to="/borrow"
             className="text-center w-full md:w-fit px-10 py-5 sm:text-2xl mt-2 md:mt-2 mb-2 md:mb-5 mx-5 md:mx-0 rounded-md border-2 border-sky-500 bg-sky-500 hover:text-sky-500 hover:border-sky-100 hover:bg-black transition-colors"

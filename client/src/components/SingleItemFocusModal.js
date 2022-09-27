@@ -327,7 +327,7 @@ const SingleItemFocusModal = ({
               <>
                 <Link to="account-gateway">
                   <p className="flex items-center justify-center bg-sky-300 w-full my-2 h-10 rounded-sm hover:bg-sky-400">
-                    Please Log In For More Details
+                    Please Log In To Inquire
                   </p>
                 </Link>
                 <button

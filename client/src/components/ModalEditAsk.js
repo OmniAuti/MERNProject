@@ -121,7 +121,7 @@ const ModalEditAsk = ({
           className="text-black overflow-scroll"
           onSubmit={(e) => handleAskSubmit(e)}
         >
-          <legend className="text-black text-xl underline underline-offset-1 mb-2">
+          <legend className="text-black w-full text-center text-xl underline underline-offset-1 mb-2">
             Ask Item Edit:{" "}
           </legend>
           <label htmlFor="who" className="text-black font-medium">

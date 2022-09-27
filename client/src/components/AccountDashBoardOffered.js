@@ -4,7 +4,7 @@ import AccountSupplyLoading from "./AccountSupplyLoading";
 const AccountDashboardOffered = ({ accountItemsData, isItemsLoaded, modalDispatch,errorPlaceholder }) => {  
   return (
     <div className="row-start-4 row-end-6 md:h-fit lg:rounded-md -ml-5 sm:-ml-0 w-screen sm:w-full lg:row-start-1 lg:row-end-4 min-h-[500px] max-h-[500px] col-start-1 sm:col-start-2 lg:col-start-5 col-end-8 bg-slate-400 overflow-scroll">
-      <p className="w-full text-2xl text-center py-3 sticky top-0 bg-slate-400 z-10 underline underline-offset-2">
+      <p className="w-full text-2xl text-center py-5 sticky top-0 bg-slate-400 z-10 underline underline-offset-2">
         Offered
       </p>
       {errorPlaceholder !== "" ? 

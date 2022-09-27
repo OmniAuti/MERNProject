@@ -4,7 +4,7 @@ import AccountSupplyLoading from "./AccountSupplyLoading";
 const AccountDashboardAsked = ({ accountAskedData, isAskLoaded, modalDispatch, errorPlaceholder }) => {
   return (
     <div className="row-start-2 row-end-4 lg:row-start-1 lg:row-end-4 min-h-[500px] max-h-[500px] col-start-1 -ml-5 sm:-ml-0 w-screen sm:w-full sm:col-start-2 col-end-8 lg:col-end-5 bg-slate-400 rounded-t-md lg:rounded-md overflow-scroll">
-      <p className="w-full text-2xl text-center py-3 sticky top-0 z-10 bg-slate-400 underline underline-offset-2">
+      <p className="w-full text-2xl text-center py-5 sticky top-0 z-10 bg-slate-400 underline underline-offset-2">
         Asked
       </p>
       {errorPlaceholder !== "" ? 

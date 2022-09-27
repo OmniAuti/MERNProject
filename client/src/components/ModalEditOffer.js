@@ -155,7 +155,7 @@ const ModalEditOffer = ({
           onSubmit={(e) => handleSubmit(e)}
           className="text-black w-full mx-auto"
         >
-          <legend className="text-black text-xl mb-2 underline underline-offset-1">
+          <legend className="text-black w-full text-center text-xl mb-2 underline underline-offset-1">
             Offer Item Edit:{" "}
           </legend>
 
@@ -470,7 +470,7 @@ const ModalEditOffer = ({
             id="file"
             name="file"
             type="file"
-            className="block w-fit p-2 my-1 mb-2 rounded-md border mx-auto cursor-pointer text-black hover:border-sky-500"
+            className="block w-full p-2 my-1 mb-2 rounded-md border mx-auto cursor-pointer text-black hover:border-sky-500"
             onChange={(e) => setImageUpload(e.target.files[0])}
           />
           <input

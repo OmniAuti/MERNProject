@@ -442,7 +442,7 @@ const PostItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
             id="file"
             name="file"
             type="file"
-            className="block w-fit p-2 my-2 rounded-md border mx-auto cursor-pointer text-white hover:border-sky-500"
+            className="block w-full p-2 my-2 rounded-md border mx-auto cursor-pointer text-white hover:border-sky-500"
             onChange={(e) => setImageUpload(e.target.files[0])}
           />
           <input

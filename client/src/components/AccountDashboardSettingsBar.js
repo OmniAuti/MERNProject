@@ -19,8 +19,8 @@ const AccountDashboardSettingsBar = ({handleLogOutUser}) => {
           </Link>
         </div>
         <div className="w-full mt-5 flex justify-center relative overflow-hidden group">
+          <Link to="/message-center">
           <button
-            onClick={() => console.log("ok")}
             className=" w-full h-full flex justify-center items-center flex-col"
           >
             <img
@@ -32,6 +32,7 @@ const AccountDashboardSettingsBar = ({handleLogOutUser}) => {
               Messages
             </p>
           </button>
+          </Link>
         </div>
         <div className="w-full flex-col items-center mt-5 flex justify-center relative overflow-hidden group">
           <button

@@ -28,6 +28,7 @@ import AccountNeedsVerification from "./pages/AccountNeedsVerification";
 import ErrorPage from "./pages/ErrorPage";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Messaging from "./pages/Messaging";
 //WRAP FOR SCROLL TO TOP ON NEW ROUTE
 import ScrollToTop from "./components/ScrollToTop";
 // REDUCERS
@@ -232,6 +233,14 @@ function App() {
                 element={
                   <ProtectedUserRoute>
                     <AccountSettings />
+                  </ProtectedUserRoute>
+                }
+              />
+                <Route
+                path="/message-center"
+                element={
+                  <ProtectedUserRoute>
+                    <Messaging />
                   </ProtectedUserRoute>
                 }
               />

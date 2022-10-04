@@ -1,81 +1,80 @@
 import firebaseApp from "../firebase";
 import {
   getFirestore,
-  collection,
-  getDocs,
-  addDoc,
-  deleteDoc,
+  doc,
+  getDoc,
+  arrayUnion,
+  updateDoc
 } from "firebase/firestore";
 import { UserAuth } from "../context/AuthContext";
+import ChatBoxInputContainer from "../components/ChatBoxInputContainer";
+import ChatMessagesAside from "../components/ChatMessagesAside";
 
 import { useEffect, useState } from "react";
-
 export const Messaging = () => {
-  const [msgObj, setMsgObj] = useState({
+  const [msgObjSubmit, setMsgObjSubmit] = useState({
     time: "",
-    uidInitiated: "",
-    uidReceived: "",
-    postId: "",
     message: "",
   });
+  const [currentMsgs, setCurrentMsgs] = useState({});
+  const [newPull, setNewPull] = useState(false);
 
   const { user } = UserAuth();
   const db = getFirestore(firebaseApp);
 
-  //   const demoDoc = async () => {
-  //     try {
-  //       const docRef = await addDoc(collection(db, user.uid), {
-  //         first: "Ada",
-  //         last: "Lovelace",
-  //         born: 1815,
-  //       });
-  //       console.log("Document written with ID: ", docRef.id);
-  //     } catch (e) {
-  //       console.error("Error adding document: ", e);
-  //     }
-  //   };
+  useEffect(() => {
+    if (!user) return;
+    getMessageArray();
+  }, [user]);
 
-  //   const readDoc = async () => {
-  //     try {
-  //       const querySnapshot = await getDocs(collection(db, "users"));
-  //       querySnapshot.forEach((doc) => {
-  //         console.log(doc.data());
-  //       });
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
+  const getMessageArray = async () => {
+    // GET THIS TO PULL RIGHT NAME
+    const docRef = doc(db, user.uid, "K6latzvX3OQs4x6OOT3zOVddje93-633072bab82f285c13bf4805");
+    const docData = await getDoc(docRef);
+    setCurrentMsgs(docData.data())
+  };
+
+
+  const handleInput = (e) => {
+    setMsgObjSubmit({
+      ...msgObjSubmit,
+      time: Date.now(),
+      uidInitiated: user.uid,
+      message: e.target.value,
+    });
+  };
+
   const handleSubmit = async (e) => {
+
+    // NEED TO GET INFORMATION FROM POST TO COMPLETE THIS LIKE DOC NAME WHICH IS CONTACTED UID AND POSTID
+
+    e.preventDefault();
     try {
-      console.log("ok");
+      await updateDoc(
+        doc(db, `${user.uid}`, "K6latzvX3OQs4x6OOT3zOVddje93-633072bab82f285c13bf4805"), {
+          messages: arrayUnion(msgObjSubmit),
+        },
+      );
+      setMsgObjSubmit({
+        time: "",
+        message: "",
+      });
     } catch (e) {
       console.log(e);
     }
+    await getMessageArray()
   };
 
   return (
-    <section className="h-screen w-full pt-[25px]">
-      <div className="bg-sky-500 mx-auto rounded-md w-[500px] h-[500px] p-1 overflow-hidden">
-        <div className="w-full bg-white rounded-md h-[432px] border border-transparent border-stone-900 ">
-          Chat
-        </div>
-        <div className="bg-sky-500 w-full h-[60px] rounded-b-md overflow-hidden">
-          <form
-            className="flex items-center justify-around h-full"
-            onSubmit={(e) => handleSubmit(e)}
-          >
-            <input
-              type="text"
-              className="w-3/4 h-[45px] rounded-md text-black pl-2 border border-stone-900 focus:outline-none"
-            />
-            <input
-              type="submit"
-              value="Send"
-              className="bg-slate-500 h-[45px] rounded-md w-[100px] border border-stone-900 hover:bg-slate-900 hover:cursor-pointer active:scale-95"
-            />
-          </form>
-        </div>
-      </div>
+    <section className="h-screen w-full flex items-center min-h-[550px]">
+      <ChatBoxInputContainer
+        user={user}
+        msgObjSubmit={msgObjSubmit}
+        currentMsgs={currentMsgs}
+        handleInput={handleInput}
+        handleSubmit={handleSubmit}
+      />
+      <ChatMessagesAside/>
     </section>
   );
 };

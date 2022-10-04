@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const AccountDashboardSettingsBar = ({handleLogOutUser}) => {
     return (
-        <div className="-ml-0 sm:-ml-5 flex flex-row h-[100px] sm:h-[700px] sm:max-h-screen -mt-[20px] sm:mt-0 sm:flex-col items-center justify-around col-start-1 col-end-8 sm:col-end-2 row-start-1 row-end-2 sm:row-end-7">
+        <aside className="-ml-0 sm:-ml-5 flex flex-row h-[100px] sm:h-[700px] sm:max-h-screen -mt-[20px] sm:mt-0 sm:flex-col items-center justify-around col-start-1 col-end-8 sm:col-end-2 row-start-1 row-end-2 sm:row-end-7">
         <div className="w-full mt-5 flex justify-center relative overflow-hidden group">
           <Link
             to="/account-settings"
@@ -49,7 +49,7 @@ const AccountDashboardSettingsBar = ({handleLogOutUser}) => {
             </p>
           </button>
         </div>
-      </div>
+      </aside>
 
     )
 }

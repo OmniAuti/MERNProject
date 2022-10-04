@@ -1,7 +1,7 @@
 import "./App.css";
 // FUNCTIONALITY
 import { Routes, Route } from "react-router-dom";
-import { useReducer, useState, useEffect } from "react";
+import { useReducer, useState, useEffect, useCallback } from "react";
 // ROUTER
 import { useLocation } from "react-router-dom";
 // COMPONENTS
@@ -32,19 +32,28 @@ import Messaging from "./pages/Messaging";
 //WRAP FOR SCROLL TO TOP ON NEW ROUTE
 import ScrollToTop from "./components/ScrollToTop";
 // REDUCERS
-import { modalReducer } from "./reducers/modalReducer";
+import { modalReducer, inquireReducer } from "./reducers/modalReducer";
 //CONTEXT IMPORT
 import AuthContextProvider from "./context/AuthContext";
 // API CALLS
 import { getSingleItem, getSingleItemAsk } from "./api/api";
-// USE REDUCER FUNCTION
+// FIREBASE DB
+import firebaseApp from "./firebase";
+import { getFirestore, setDoc, doc } from "firebase/firestore";
 
 function App() {
+
+  // REDUCERS ---------------------------------------------------
   const [state, modalDispatch] = useReducer(modalReducer, {
     modalId: "",
     active: false,
     modalType: "",
   });
+  const [stateInquire, inquireDispatch] = useReducer(inquireReducer, {
+    postData: {},
+    userData: {},
+  });
+  // STATE ---------------------------------------------------
   const [modalDataSingleFocus, setModalDataSingleFocus] = useState([]);
   const [modalDataEdit, setModalDataEdit] = useState([]);
   const [activeModal, setActiveModal] = useState(false);
@@ -55,10 +64,16 @@ function App() {
   const [bookmarkRefresh, setBookmarkRefresh] = useState(false);
   const [postFailure, setPostFailure] = useState(false);
   const [postFailureMsg, setPostFailureMsg] = useState(false);
-
   const [refreshAfterEdit, setRefreshAfterEdit] = useState(false);
 
   const location = useLocation();
+
+  // USE EFFECTS -----------------------------------------------------
+  // CREATED INQUIRE IN FIRESTORE
+  useEffect(() => {
+    if (stateInquire.postData === {}) return;
+    handleInquire(stateInquire.userData, stateInquire.postData);
+  }, [stateInquire.postData]);
 
   // USED TO CLOSE MODAL ON PAGE CHANGE
   useEffect(() => {
@@ -147,6 +162,61 @@ function App() {
     setPostFailure(true);
   };
 
+  const db = getFirestore(firebaseApp);
+
+  const handleInquire = async (user, data) => {
+    try {
+      if (data.postType === "ask") {
+        await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
+          messages: [
+            {
+              message: "Hello! I'm interested in your post",
+              time: Date.now(),
+              uidInitiated: user.uid,
+            },
+          ],
+          timeFirstInitiated: Date.now(),
+          postData: {
+            condition: data.condition,
+            specify: data.specify,
+            location: data.location,
+            postType: data.postType,
+            quantity: data.quantity,
+            type: data.type,
+            who: data.who,
+            zipcode: data.zipcode,
+            _id: data._id,
+            _uid: data._uid,
+          },
+        });
+      } else if (data.postType === "offer")
+        await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
+          messages: [
+            {
+              message: "Hello! I'm interested in your post",
+              time: Date.now(),
+              uidInitiated: user.uid,
+            },
+          ],
+          timeFirstInitiated: Date.now(),
+          postData: {
+            condition: data.condition,
+            description: data.description,
+            location: data.location,
+            photoInfo: data.photoInfo,
+            postType: data.postType,
+            quantity: data.quantity,
+            type: data.type,
+            zipcode: data.zipcode,
+            _id: data._id,
+            _uid: data._uid,
+          },
+        });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <div className="overflow-x-hidden">
       <AuthContextProvider>
@@ -161,6 +231,7 @@ function App() {
           modalLoaded={modalLoaded}
           handleModalBookmark={handleModalBookmark}
           handlePostFailure={handlePostFailure}
+          inquireDispatch={inquireDispatch}
         />
 
         <AccountEditPostModal

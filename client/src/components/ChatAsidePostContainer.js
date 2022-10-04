@@ -1,6 +1,6 @@
 const ChatAsidePostContainer = ({ data, modalDispatch }) => {
   return (
-    <div className="w-full rounded-md bg-white cursor-pointer border border-stone-900 overflow-hidden my-1">
+    <div className="w-full rounded-md bg-white border border-stone-900 overflow-hidden my-1">
       <div className="p-2 py-1">
         <p className="text-black ">
           {" "}

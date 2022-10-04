@@ -3,10 +3,7 @@ import { addBookmark, bookmarkAskItem } from "../api/api";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import Loading from "./Loading";
-import { useNavigate } from "react-router-dom";
 
-import firebaseApp from "../firebase";
-import { getFirestore, setDoc, doc } from "firebase/firestore";
 
 const SingleItemFocusModal = ({
   data,
@@ -16,6 +13,7 @@ const SingleItemFocusModal = ({
   modalLoaded,
   handleModalBookmark,
   handlePostFailure,
+  inquireDispatch,
 }) => {
   var cardBgColor;
   var askIcon;
@@ -140,8 +138,6 @@ const SingleItemFocusModal = ({
   const [bookmarkCheck, setBookmarkCheck] = useState(false);
   const [logInCheck, setLogInCheck] = useState(false);
 
-  const db = getFirestore(firebaseApp);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (Object.values(data).length <= 0) return;
@@ -185,61 +181,6 @@ const SingleItemFocusModal = ({
       }
     } catch (e) {
       console.log(e);
-    }
-  };
-
-  const handleInquire = async () => {
-    console.log(data);
-    try {
-      if (data.postType === "ask") {
-        await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
-          messages: [
-            {
-              message: "Hello! I'm interested in your post",
-              time: Date.now(),
-              uidInitiated: user.uid,
-            },
-          ],
-          timeFirstInitiated: Date.now(),
-          postData: {
-            condition: data.condition,
-            specify: data.specify,
-            location: data.location,
-            postType: data.postType,
-            quantity: data.quantity,
-            type: data.type,
-            who:data.who,
-            zipcode: data.zipcode,
-            _id: data._id,
-            _uid: data._uid,
-          },
-        });
-      } else if (data.postType === "offer")
-        await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
-          messages: [
-            {
-              message: "Hello! I'm interested in your post",
-              time: Date.now(),
-              uidInitiated: user.uid,
-            },
-          ],
-          timeFirstInitiated: Date.now(),
-          postData: {
-            condition: data.condition,
-            description: data.description,
-            location: data.location,
-            photoInfo: data.photoInfo,
-            postType: data.postType,
-            quantity: data.quantity,
-            type: data.type,
-            zipcode: data.zipcode,
-            _id: data._id,
-            _uid: data._uid,
-          },
-        });
-      // navigate("/message-center")
-    } catch (e) {
-      console.error(e);
     }
   };
 
@@ -369,7 +310,10 @@ const SingleItemFocusModal = ({
               <>
                 <button
                   disabled={user.emailVerified === true ? false : true}
-                  onClick={() => handleInquire()}
+                  onClick={() => inquireDispatch({
+                    type:"CHAT-INQUIRE",
+                    payload: {postData: data, userData: user}
+                  })}
                   className="bg-sky-500 w-full h-10 my-2 disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer rounded-sm hover:bg-sky-600"
                 >
                   {user.emailVerified === true

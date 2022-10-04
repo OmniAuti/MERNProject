@@ -1,6 +1,6 @@
 const ChatMessages = ({ msg, user }) => {
   return (
-    <div className={user.uid === msg.uidInitiated ? "bg-sky-200 w-fit px-2 rounded-md m-1 border border-black self-end" : "bg-green-200 w-fit px-2 rounded-md my-1 border border-black"}>
+    <div className={user.uid === msg.uidInitiated ? "bg-sky-200 w-fit px-2 rounded-md m-1 border border-black self-end max-w-1/2 text-right" : "bg-green-200 w-fit max-w-1/2 px-2 rounded-md m-1 border border-black text-left"}>
       <p className="text-black">{msg.message}</p>
     </div>
   );

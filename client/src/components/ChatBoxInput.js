@@ -5,6 +5,7 @@ const ChatBoxInput = ({ handleInput, handleSubmit, msgObjSubmit }) => {
       onSubmit={(e) => handleSubmit(e)}
     >
       <input
+        required
         onChange={(e) => handleInput(e)}
         value={msgObjSubmit.message}
         type="text"

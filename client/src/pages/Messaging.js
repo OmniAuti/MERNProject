@@ -3,21 +3,23 @@ import {
   getFirestore,
   doc,
   getDoc,
+  getDocs,
   arrayUnion,
-  updateDoc
+  updateDoc,
+  collection,
 } from "firebase/firestore";
 import { UserAuth } from "../context/AuthContext";
 import ChatBoxInputContainer from "../components/ChatBoxInputContainer";
 import ChatMessagesAside from "../components/ChatMessagesAside";
 
 import { useEffect, useState } from "react";
-export const Messaging = () => {
+export const Messaging = ({modalDispatch}) => {
   const [msgObjSubmit, setMsgObjSubmit] = useState({
     time: "",
     message: "",
   });
   const [currentMsgs, setCurrentMsgs] = useState({});
-  const [newPull, setNewPull] = useState(false);
+  const [allDocumentsData, setAllDocumentsData] = useState([]);
 
   const { user } = UserAuth();
   const db = getFirestore(firebaseApp);
@@ -28,12 +30,23 @@ export const Messaging = () => {
   }, [user]);
 
   const getMessageArray = async () => {
-    // GET THIS TO PULL RIGHT NAME
-    const docRef = doc(db, user.uid, "K6latzvX3OQs4x6OOT3zOVddje93-633072bab82f285c13bf4805");
-    const docData = await getDoc(docRef);
-    setCurrentMsgs(docData.data())
-  };
+    var arrHolder = []
+    await getDocs(collection(db, user.uid)).then((res) => {
+      res.forEach((msg) => {
+        arrHolder.push(msg.data());
+      });
+      setAllDocumentsData(arrHolder)
+    });
 
+    // GET THIS TO PULL RIGHT NAME
+    const docRef = doc(
+      db,
+      user.uid,
+      "K6latzvX3OQs4x6OOT3zOVddje93-633072bab82f285c13bf4805"
+    );
+    const docData = await getDoc(docRef);
+    setCurrentMsgs(docData.data());
+  };
 
   const handleInput = (e) => {
     setMsgObjSubmit({
@@ -45,15 +58,18 @@ export const Messaging = () => {
   };
 
   const handleSubmit = async (e) => {
-
     // NEED TO GET INFORMATION FROM POST TO COMPLETE THIS LIKE DOC NAME WHICH IS CONTACTED UID AND POSTID
-
     e.preventDefault();
     try {
       await updateDoc(
-        doc(db, `${user.uid}`, "K6latzvX3OQs4x6OOT3zOVddje93-633072bab82f285c13bf4805"), {
+        doc(
+          db,
+          `${user.uid}`,
+          "K6latzvX3OQs4x6OOT3zOVddje93-633072bab82f285c13bf4805"
+        ),
+        {
           messages: arrayUnion(msgObjSubmit),
-        },
+        }
       );
       setMsgObjSubmit({
         time: "",
@@ -62,11 +78,11 @@ export const Messaging = () => {
     } catch (e) {
       console.log(e);
     }
-    await getMessageArray()
+    await getMessageArray();
   };
 
   return (
-    <section className="h-screen w-full flex items-center min-h-[550px]">
+    <section className="h-screen w-full flex items-center justify-center min-h-[550px]">
       <ChatBoxInputContainer
         user={user}
         msgObjSubmit={msgObjSubmit}
@@ -74,7 +90,7 @@ export const Messaging = () => {
         handleInput={handleInput}
         handleSubmit={handleSubmit}
       />
-      <ChatMessagesAside/>
+      <ChatMessagesAside modalDispatch={modalDispatch} allDocumentsData={allDocumentsData} />
     </section>
   );
 };

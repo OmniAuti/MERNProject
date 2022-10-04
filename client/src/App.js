@@ -236,11 +236,11 @@ function App() {
                   </ProtectedUserRoute>
                 }
               />
-                <Route
+              <Route
                 path="/message-center"
                 element={
                   <ProtectedUserRoute>
-                    <Messaging />
+                    <Messaging modalDispatch={modalDispatch} />
                   </ProtectedUserRoute>
                 }
               />

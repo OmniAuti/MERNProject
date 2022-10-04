@@ -147,8 +147,6 @@ const SingleItemFocusModal = ({
     if (Object.values(data).length <= 0) return;
     handleOpenModal();
     handleBookmarkCheck();
-    console.log(data);
-
     return () => {};
   }, [data]);
 
@@ -162,7 +160,6 @@ const SingleItemFocusModal = ({
 
   const handleBookmark = async () => {
     if (!user || user === undefined) return;
-
     var bookmark = { _uid: user.uid, postId: data._id };
     try {
       if (data.postType === "ask") {
@@ -192,29 +189,54 @@ const SingleItemFocusModal = ({
   };
 
   const handleInquire = async () => {
+    console.log(data);
     try {
-      await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
-        messages: [
-          {
-            message: "Hello! I'm interested in your post",
-            time: Date.now(),
-            uidInitiated: user.uid,
+      if (data.postType === "ask") {
+        await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
+          messages: [
+            {
+              message: "Hello! I'm interested in your post",
+              time: Date.now(),
+              uidInitiated: user.uid,
+            },
+          ],
+          timeFirstInitiated: Date.now(),
+          postData: {
+            condition: data.condition,
+            specify: data.specify,
+            location: data.location,
+            postType: data.postType,
+            quantity: data.quantity,
+            type: data.type,
+            who:data.who,
+            zipcode: data.zipcode,
+            _id: data._id,
+            _uid: data._uid,
           },
-        ],
-        timeFirstInitiated: Date.now(),
-        postData: {
-          condition: data.condition,
-          description: data.description,
-          location: data.location,
-          photoInfo: data.photoInfo,
-          postType: data.postType,
-          quantity: data.quantity,
-          type: data.type,
-          zipcode: data.zipcode,
-          _id: data._id,
-          _uid: data._uid,
-        },
-      });
+        });
+      } else if (data.postType === "offer")
+        await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
+          messages: [
+            {
+              message: "Hello! I'm interested in your post",
+              time: Date.now(),
+              uidInitiated: user.uid,
+            },
+          ],
+          timeFirstInitiated: Date.now(),
+          postData: {
+            condition: data.condition,
+            description: data.description,
+            location: data.location,
+            photoInfo: data.photoInfo,
+            postType: data.postType,
+            quantity: data.quantity,
+            type: data.type,
+            zipcode: data.zipcode,
+            _id: data._id,
+            _uid: data._uid,
+          },
+        });
       // navigate("/message-center")
     } catch (e) {
       console.error(e);

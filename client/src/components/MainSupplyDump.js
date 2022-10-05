@@ -1,14 +1,17 @@
 import SupplyObjectCard from "./SupplyObjectCard";
 import Loading from "./Loading";
 import EmptySuppliesPlaceHolder from "./EmptySuppliesPlaceholder";
-
 import { useCallback, useEffect, useState } from "react";
 import { fetchAllItems } from "../api/api";
+
+import { UserAuth } from "../context/AuthContext";
 
 const MainSupplyDump = ({ modalDispatch }) => {
   const [dumpData, setDumpData] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [errorPlaceholder, setErrorPlaceholder] = useState('')
+
+  const {user} = UserAuth()
 
   useEffect(() => {
     handleLoadPreviewOfItems()
@@ -16,8 +19,13 @@ const MainSupplyDump = ({ modalDispatch }) => {
 
   const handleLoadPreviewOfItems = async () => {
     try {
-      await fetchAllItems().then((res) => setDumpData(res.data));
-      handleLoad();
+      if (user) {
+        await fetchAllItems().then((res) => setDumpData(res.data.filter(userHide => user.uid !== userHide._uid)));
+        handleLoad();
+      } else {
+        await fetchAllItems().then((res) => setDumpData(res.data));
+        handleLoad();
+      }
     } catch (err) {
       setErrorPlaceholder(err.toString())
       setIsLoaded(true);

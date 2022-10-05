@@ -1,4 +1,5 @@
 import { getAskedForItems } from "../api/api";
+import { UserAuth } from "../context/AuthContext";
 
 import { useEffect, useState } from "react";
 import SupplyObjectCard from "../components/SupplyObjectCard";
@@ -10,8 +11,10 @@ import EmptyAskSuppliesPlaceHolder from "./EmptyAskSuppliesPlaceHolder";
 
 const AskedForItems = ({ modalDispatch, handlePostFailure }) => {
 
+  const {user} = UserAuth()
+
   const handleFilterForm = (data) => {
-    setDataDump(data)
+    setDataDump(data.filter(userHide => user.uid !== userHide._uid))
   }
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -25,7 +28,7 @@ const AskedForItems = ({ modalDispatch, handlePostFailure }) => {
 
   const handleLoading = async () => {
     try {
-      await getAskedForItems().then((res) => setDataDump(res.data));
+      await getAskedForItems().then((res) => setDataDump(res.data.filter(userHide => user.uid !== userHide._uid)));
       setIsLoaded(true);
     } catch (err) {
       setIsLoaded(true);

@@ -9,7 +9,7 @@ const ChatMessagesAside = ({
 }) => {
 
   return (
-    <aside className="w-[300px] h-[500px] max-h-[500px] overflow-scroll bg-sky-500 rounded-tr-md rounded-br-md p-2">
+    <aside className="w-[300px] h-[500px] max-h-[500px] overflow-scroll bg-sky-500 -mt-[50px] rounded-tr-md rounded-br-md p-2">
       <h2 className="text-center">Open Inquiries</h2>
     
       {allDocumentsData.length === 0 ? (

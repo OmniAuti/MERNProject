@@ -1,6 +1,7 @@
 import { fetchAllItems } from "../api/api";
-
 import { useEffect, useState } from "react";
+import { UserAuth } from "../context/AuthContext";
+
 import SupplyObjectCard from "../components/SupplyObjectCard";
 import FilterForm from "../components/FilterForm";
 import Loading from "../components/Loading";
@@ -9,7 +10,7 @@ import EmptySuppliesPlaceHolder from "../components/EmptySuppliesPlaceholder";
 
 const Borrow = ({ modalDispatch, handlePostFailure }) => {
   const handleFilterForm = (data) => {
-    setDataDump(data);
+    setDataDump(data.filter(userHide => user.uid !== userHide._uid));
   };
   // NEEDS DEFINE CUT OFF POINT, THEN WHEN SCROLL FAR ENOUGH IT LOADS THE NEXT BATCH OF ITEMS SO ON AND SO ON.
   const [isLoaded, setIsLoaded] = useState(false);
@@ -18,14 +19,21 @@ const Borrow = ({ modalDispatch, handlePostFailure }) => {
   const [activeFilter, setActiveFilter] = useState(false);
   const [errorPlaceholder, setErrorPlaceholder] = useState('')
 
+  const {user} = UserAuth()
+
   useEffect(() => {
     handleLoading();
   }, []);
 
   const handleLoading = async () => {
     try {
-      await fetchAllItems().then((res) => setDataDump(res.data));
-      setIsLoaded(true);
+      if (user) {
+        await fetchAllItems().then((res) => setDataDump(res.data.filter(userHide => user.uid !== userHide._uid)));
+        setIsLoaded(true);
+      } else {
+        await fetchAllItems().then((res) => setDataDump(res.data));
+        setIsLoaded(true);
+      }
     } catch (err) {
       setErrorPlaceholder(err.toString())
       setIsLoaded(true);

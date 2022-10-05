@@ -4,7 +4,8 @@ const ChatMessagesAside = ({
   allDocumentsData,
   modalDispatch,
   handleDisplayMessages,
-  handleSetCurrentDoc
+  handleSetCurrentDoc,
+  currentDoc
 }) => {
 
   return (
@@ -16,6 +17,7 @@ const ChatMessagesAside = ({
       ) : (
         allDocumentsData.map((data) => (
           <ChatAsidePostContainer
+            currentDoc={currentDoc}
             handleSetCurrentDoc={handleSetCurrentDoc}
             handleDisplayMessages={handleDisplayMessages}
             allDocumentsData={allDocumentsData}

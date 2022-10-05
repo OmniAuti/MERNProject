@@ -52,13 +52,15 @@ export const Messaging = ({ modalDispatch }) => {
 
   const getCurrentMessageArray = async () => {
     try {
-      await getDoc(doc(
-        db,
-        user.uid,
-        `${currentDoc.postData._uid}-${currentDoc.postData._id}`
-      )).then((res) => setCurrentMsgs(res.data().messages));
+      await getDoc(
+        doc(
+          db,
+          user.uid,
+          `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+        )
+      ).then((res) => setCurrentMsgs(res.data().messages));
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   };
 
@@ -76,7 +78,6 @@ export const Messaging = ({ modalDispatch }) => {
   };
 
   const handleSetCurrentDoc = (data) => {
-    console.log(data, "current doc");
     setCurrentDoc(data);
   };
 
@@ -84,16 +85,51 @@ export const Messaging = ({ modalDispatch }) => {
     // NEED TO GET INFORMATION FROM POST TO COMPLETE THIS LIKE DOC NAME WHICH IS CONTACTED UID AND POSTID
     e.preventDefault();
     try {
-      await updateDoc(
-        doc(
-          db,
-          `${user.uid}`,
-          `${currentDoc.postData._uid}-${currentDoc.postData._id}`
-        ),
-        {
-          messages: arrayUnion(msgObjSubmit),
-        }
-      );
+      if (user.uid === currentDoc.postData._uid) {
+        //UPDATES CHAT INITIATOR MESSAGE ARRAY
+        await updateDoc(
+          doc(
+            db,
+            `${currentDoc.messages[0].uidInitiated}`,
+            `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+          ),
+          {
+            messages: arrayUnion(msgObjSubmit),
+          }
+        );
+        // UPDATES POST USER MESSAGE ARRAY
+        await updateDoc(
+          doc(
+            db,
+            `${user.uid}`,
+            `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+          ),
+          {
+            messages: arrayUnion(msgObjSubmit),
+          }
+        );
+      } else if (user.uid === currentDoc.messages[0].uidInitiated) {
+        await updateDoc(
+          doc(
+            db,
+            `${user.uid}`,
+            `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+          ),
+          {
+            messages: arrayUnion(msgObjSubmit),
+          }
+        );
+        await updateDoc(
+          doc(
+            db,
+            `${currentDoc.postData._uid}`,
+            `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+          ),
+          {
+            messages: arrayUnion(msgObjSubmit),
+          }
+        );
+      }
       setMsgObjSubmit({
         time: "",
         message: "",
@@ -103,7 +139,6 @@ export const Messaging = ({ modalDispatch }) => {
       console.log(e);
     }
   };
-
   return (
     <section className="h-screen w-full flex items-center justify-center min-h-[550px]">
       <ChatBoxInputContainer
@@ -114,6 +149,7 @@ export const Messaging = ({ modalDispatch }) => {
         handleSubmit={handleSubmit}
       />
       <ChatMessagesAside
+        currentDoc={currentDoc}
         handleSetCurrentDoc={handleSetCurrentDoc}
         handleDisplayMessages={handleDisplayMessages}
         modalDispatch={modalDispatch}

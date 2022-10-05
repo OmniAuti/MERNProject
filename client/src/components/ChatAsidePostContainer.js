@@ -4,17 +4,24 @@ const ChatAsidePostContainer = ({
   handleDisplayMessages,
   allDocumentsData,
   handleSetCurrentDoc,
+  currentDoc,
 }) => {
   const handleMatchChatDataWithPost = async () => {
     var filteredData = allDocumentsData.filter(
       (post) => data._id === post.postData._id
     );
     handleDisplayMessages(filteredData[0].messages);
-    handleSetCurrentDoc(filteredData[0])
+    handleSetCurrentDoc(filteredData[0]);
   };
 
   return (
-    <div className="w-full rounded-md bg-white border border-stone-900 overflow-hidden my-1">
+    <div
+      className={
+        currentDoc.postData._id === data._id
+          ? "w-full rounded-md bg-white border-4 shadow-md shadow-black border-sky-900 overflow-hidden my-1"
+          : "w-full rounded-md bg-white border border-stone-900 overflow-hidden my-1"
+      }
+    >
       <div className="p-2 py-1">
         <p className="text-black ">
           {" "}

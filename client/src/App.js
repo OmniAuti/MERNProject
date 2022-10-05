@@ -42,7 +42,6 @@ import firebaseApp from "./firebase";
 import { getFirestore, setDoc, doc } from "firebase/firestore";
 
 function App() {
-
   // REDUCERS ---------------------------------------------------
   const [state, modalDispatch] = useReducer(modalReducer, {
     modalId: "",
@@ -161,12 +160,13 @@ function App() {
     setPostFailureMsg(err.toString());
     setPostFailure(true);
   };
-
+// THIS IS FOR THE MODAL INQUIRE CHAT FROM THE FIREBASE STORE ---------------
   const db = getFirestore(firebaseApp);
 
   const handleInquire = async (user, data) => {
     try {
       if (data.postType === "ask") {
+        // CHAT INTIATOR  -----------------------------------------------------
         await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
           messages: [
             {
@@ -189,7 +189,31 @@ function App() {
             _uid: data._uid,
           },
         });
-      } else if (data.postType === "offer")
+        // CHAT RECIEVED  ----------------------------------------------
+        await setDoc(doc(db, data._uid, `${data._uid}-${data._id}`), {
+          messages: [
+            {
+              message: "Hello! I'm interested in your post",
+              time: Date.now(),
+              uidInitiated: user.uid,
+            },
+          ],
+          timeFirstInitiated: Date.now(),
+          postData: {
+            condition: data.condition,
+            specify: data.specify,
+            location: data.location,
+            postType: data.postType,
+            quantity: data.quantity,
+            type: data.type,
+            who: data.who,
+            zipcode: data.zipcode,
+            _id: data._id,
+            _uid: data._uid,
+          },
+        });
+      } else if (data.postType === "offer") {
+        // CHAT INTIATOR  --------------------------------------------
         await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
           messages: [
             {
@@ -212,6 +236,30 @@ function App() {
             _uid: data._uid,
           },
         });
+        // CHAT RECIEVED  ----------------------------------------------
+        await setDoc(doc(db, data._uid, `${data._uid}-${data._id}`), {
+          messages: [
+            {
+              message: "Hello! I'm interested in your post",
+              time: Date.now(),
+              uidInitiated: user.uid,
+            },
+          ],
+          timeFirstInitiated: Date.now(),
+          postData: {
+            condition: data.condition,
+            description: data.description,
+            location: data.location,
+            photoInfo: data.photoInfo,
+            postType: data.postType,
+            quantity: data.quantity,
+            type: data.type,
+            zipcode: data.zipcode,
+            _id: data._id,
+            _uid: data._uid,
+          },
+        });
+      }
     } catch (e) {
       console.error(e);
     }

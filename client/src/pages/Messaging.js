@@ -13,37 +13,58 @@ import ChatBoxInputContainer from "../components/ChatBoxInputContainer";
 import ChatMessagesAside from "../components/ChatMessagesAside";
 
 import { useEffect, useState } from "react";
-export const Messaging = ({modalDispatch}) => {
+export const Messaging = ({ modalDispatch }) => {
   const [msgObjSubmit, setMsgObjSubmit] = useState({
     time: "",
     message: "",
   });
   const [currentMsgs, setCurrentMsgs] = useState([]);
   const [allDocumentsData, setAllDocumentsData] = useState([]);
+  const [currentDoc, setCurrentDoc] = useState({});
 
   const { user } = UserAuth();
   const db = getFirestore(firebaseApp);
 
   useEffect(() => {
     if (!user) return;
-    getMessageArray();
+    getInitialMessageArray();
   }, [user]);
 
-  const getMessageArray = async () => {
-    var arrHolder = []
-    await getDocs(collection(db, user.uid)).then((res) => {
-      res.forEach((msg) => {
-        arrHolder.push(msg.data());
+  const getInitialMessageArray = async () => {
+    var arrHolder = [];
+    try {
+      await getDocs(collection(db, user.uid)).then((res) => {
+        res.forEach((msg) => {
+          arrHolder.push(msg.data());
+        });
+        setAllDocumentsData(
+          arrHolder.sort((a, b) => a.timeFirstInitiated - b.timeFirstInitiated)
+        );
       });
-      setAllDocumentsData(arrHolder.sort((a,b) => a.timeFirstInitiated - b.timeFirstInitiated))
-    });
 
-    handleDisplayMessages(arrHolder[0].messages)
+      if (arrHolder.length === 0) return;
+      handleSetCurrentDoc(arrHolder[0]);
+      handleDisplayMessages(arrHolder[0].messages);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const getCurrentMessageArray = async () => {
+    try {
+      await getDoc(doc(
+        db,
+        user.uid,
+        `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+      )).then((res) => setCurrentMsgs(res.data().messages));
+    } catch (e) {
+      console.log(e)
+    }
   };
 
   const handleDisplayMessages = (data) => {
-    setCurrentMsgs(data)
-  }
+    setCurrentMsgs(data);
+  };
 
   const handleInput = (e) => {
     setMsgObjSubmit({
@@ -54,6 +75,11 @@ export const Messaging = ({modalDispatch}) => {
     });
   };
 
+  const handleSetCurrentDoc = (data) => {
+    console.log(data, "current doc");
+    setCurrentDoc(data);
+  };
+
   const handleSubmit = async (e) => {
     // NEED TO GET INFORMATION FROM POST TO COMPLETE THIS LIKE DOC NAME WHICH IS CONTACTED UID AND POSTID
     e.preventDefault();
@@ -62,7 +88,7 @@ export const Messaging = ({modalDispatch}) => {
         doc(
           db,
           `${user.uid}`,
-          "K6latzvX3OQs4x6OOT3zOVddje93-633072bab82f285c13bf4805"
+          `${currentDoc.postData._uid}-${currentDoc.postData._id}`
         ),
         {
           messages: arrayUnion(msgObjSubmit),
@@ -72,10 +98,10 @@ export const Messaging = ({modalDispatch}) => {
         time: "",
         message: "",
       });
+      await getCurrentMessageArray();
     } catch (e) {
       console.log(e);
     }
-    await getMessageArray();
   };
 
   return (
@@ -87,7 +113,12 @@ export const Messaging = ({modalDispatch}) => {
         handleInput={handleInput}
         handleSubmit={handleSubmit}
       />
-      <ChatMessagesAside handleDisplayMessages={handleDisplayMessages} modalDispatch={modalDispatch} allDocumentsData={allDocumentsData} />
+      <ChatMessagesAside
+        handleSetCurrentDoc={handleSetCurrentDoc}
+        handleDisplayMessages={handleDisplayMessages}
+        modalDispatch={modalDispatch}
+        allDocumentsData={allDocumentsData}
+      />
     </section>
   );
 };

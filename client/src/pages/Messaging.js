@@ -38,7 +38,7 @@ export const Messaging = ({ modalDispatch }) => {
           arrHolder.push(msg.data());
         });
         setAllDocumentsData(
-          arrHolder.sort((a, b) => a.timeFirstInitiated - b.timeFirstInitiated)
+          arrHolder.sort((a, b) => b.timeFirstInitiated - a.timeFirstInitiated)
         );
       });
 
@@ -82,7 +82,6 @@ export const Messaging = ({ modalDispatch }) => {
   };
 
   const handleSubmit = async (e) => {
-    // NEED TO GET INFORMATION FROM POST TO COMPLETE THIS LIKE DOC NAME WHICH IS CONTACTED UID AND POSTID
     e.preventDefault();
     try {
       if (user.uid === currentDoc.postData._uid) {
@@ -140,7 +139,9 @@ export const Messaging = ({ modalDispatch }) => {
     }
   };
   return (
-    <section className="h-screen w-full flex items-center justify-center min-h-[550px]">
+    <section className="h-screen w-full flex flex-col items-center  min-h-[550px]">
+      <h1 className="text-3xl my-10">Message Center</h1>
+      <div className="flex items-center justify-center">
       <ChatBoxInputContainer
         user={user}
         msgObjSubmit={msgObjSubmit}
@@ -155,6 +156,7 @@ export const Messaging = ({ modalDispatch }) => {
         modalDispatch={modalDispatch}
         allDocumentsData={allDocumentsData}
       />
+      </div>
     </section>
   );
 };

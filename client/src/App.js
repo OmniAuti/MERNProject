@@ -3,7 +3,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { useReducer, useState, useEffect, useCallback } from "react";
 // ROUTER
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // COMPONENTS
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -39,7 +39,7 @@ import AuthContextProvider from "./context/AuthContext";
 import { getSingleItem, getSingleItemAsk } from "./api/api";
 // FIREBASE DB
 import firebaseApp from "./firebase";
-import { getFirestore, setDoc, doc } from "firebase/firestore";
+import { getFirestore, setDoc, doc, getDoc } from "firebase/firestore";
 
 function App() {
   // REDUCERS ---------------------------------------------------
@@ -66,6 +66,7 @@ function App() {
   const [refreshAfterEdit, setRefreshAfterEdit] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   // USE EFFECTS -----------------------------------------------------
   // CREATED INQUIRE IN FIRESTORE
@@ -160,105 +161,114 @@ function App() {
     setPostFailureMsg(err.toString());
     setPostFailure(true);
   };
-// THIS IS FOR THE MODAL INQUIRE CHAT FROM THE FIREBASE STORE ---------------
+  // THIS IS FOR THE MODAL INQUIRE CHAT FROM THE FIREBASE STORE ---------------
   const db = getFirestore(firebaseApp);
 
   const handleInquire = async (user, data) => {
     try {
-      if (data.postType === "ask") {
-        // CHAT INTIATOR  -----------------------------------------------------
-        await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
-          messages: [
-            {
-              message: "Hello! I'm interested in your post",
-              time: Date.now(),
-              uidInitiated: user.uid,
+      const docRef = doc(db, user.uid, `${data._uid}-${data._id}`);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+        navigate("/message-center");
+        return;
+      } else {
+        if (data.postType === "ask") {
+          //  CHAT INTIATOR  -----------------------------------------------------
+          await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
+            messages: [
+              {
+                message: "Hello, I'm interested in your post!",
+                time: Date.now(),
+                uidInitiated: user.uid,
+              },
+            ],
+            timeFirstInitiated: Date.now(),
+            postData: {
+              condition: data.condition,
+              specify: data.specify,
+              location: data.location,
+              postType: data.postType,
+              quantity: data.quantity,
+              type: data.type,
+              who: data.who,
+              zipcode: data.zipcode,
+              _id: data._id,
+              _uid: data._uid,
             },
-          ],
-          timeFirstInitiated: Date.now(),
-          postData: {
-            condition: data.condition,
-            specify: data.specify,
-            location: data.location,
-            postType: data.postType,
-            quantity: data.quantity,
-            type: data.type,
-            who: data.who,
-            zipcode: data.zipcode,
-            _id: data._id,
-            _uid: data._uid,
-          },
-        });
-        // CHAT RECIEVED  ----------------------------------------------
-        await setDoc(doc(db, data._uid, `${data._uid}-${data._id}`), {
-          messages: [
-            {
-              message: "Hello! I'm interested in your post",
-              time: Date.now(),
-              uidInitiated: user.uid,
+          });
+          // CHAT RECIEVED  ----------------------------------------------
+          await setDoc(doc(db, data._uid, `${data._uid}-${data._id}`), {
+            messages: [
+              {
+                message: "Hello! I'm interested in your post",
+                time: Date.now(),
+                uidInitiated: user.uid,
+              },
+            ],
+            timeFirstInitiated: Date.now(),
+            postData: {
+              condition: data.condition,
+              specify: data.specify,
+              location: data.location,
+              postType: data.postType,
+              quantity: data.quantity,
+              type: data.type,
+              who: data.who,
+              zipcode: data.zipcode,
+              _id: data._id,
+              _uid: data._uid,
             },
-          ],
-          timeFirstInitiated: Date.now(),
-          postData: {
-            condition: data.condition,
-            specify: data.specify,
-            location: data.location,
-            postType: data.postType,
-            quantity: data.quantity,
-            type: data.type,
-            who: data.who,
-            zipcode: data.zipcode,
-            _id: data._id,
-            _uid: data._uid,
-          },
-        });
-      } else if (data.postType === "offer") {
-        // CHAT INTIATOR  --------------------------------------------
-        await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
-          messages: [
-            {
-              message: "Hello! I'm interested in your post",
-              time: Date.now(),
-              uidInitiated: user.uid,
+          });
+        } else if (data.postType === "offer") {
+          // CHAT INTIATOR  --------------------------------------------
+          await setDoc(doc(db, user.uid, `${data._uid}-${data._id}`), {
+            messages: [
+              {
+                message: "Hello! I'm interested in your post",
+                time: Date.now(),
+                uidInitiated: user.uid,
+              },
+            ],
+            timeFirstInitiated: Date.now(),
+            postData: {
+              condition: data.condition,
+              description: data.description,
+              location: data.location,
+              photoInfo: data.photoInfo,
+              postType: data.postType,
+              quantity: data.quantity,
+              type: data.type,
+              zipcode: data.zipcode,
+              _id: data._id,
+              _uid: data._uid,
             },
-          ],
-          timeFirstInitiated: Date.now(),
-          postData: {
-            condition: data.condition,
-            description: data.description,
-            location: data.location,
-            photoInfo: data.photoInfo,
-            postType: data.postType,
-            quantity: data.quantity,
-            type: data.type,
-            zipcode: data.zipcode,
-            _id: data._id,
-            _uid: data._uid,
-          },
-        });
-        // CHAT RECIEVED  ----------------------------------------------
-        await setDoc(doc(db, data._uid, `${data._uid}-${data._id}`), {
-          messages: [
-            {
-              message: "Hello! I'm interested in your post",
-              time: Date.now(),
-              uidInitiated: user.uid,
+          });
+          // CHAT RECIEVED  ----------------------------------------------
+          await setDoc(doc(db, data._uid, `${data._uid}-${data._id}`), {
+            messages: [
+              {
+                message: "Hello! I'm interested in your post",
+                time: Date.now(),
+                uidInitiated: user.uid,
+              },
+            ],
+            timeFirstInitiated: Date.now(),
+            postData: {
+              condition: data.condition,
+              description: data.description,
+              location: data.location,
+              photoInfo: data.photoInfo,
+              postType: data.postType,
+              quantity: data.quantity,
+              type: data.type,
+              zipcode: data.zipcode,
+              _id: data._id,
+              _uid: data._uid,
             },
-          ],
-          timeFirstInitiated: Date.now(),
-          postData: {
-            condition: data.condition,
-            description: data.description,
-            location: data.location,
-            photoInfo: data.photoInfo,
-            postType: data.postType,
-            quantity: data.quantity,
-            type: data.type,
-            zipcode: data.zipcode,
-            _id: data._id,
-            _uid: data._uid,
-          },
-        });
+          });
+        }
       }
     } catch (e) {
       console.error(e);

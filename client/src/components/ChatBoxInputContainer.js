@@ -19,7 +19,7 @@ const ChatBoxInputContainer = ({
   }, [currentMsgs]);
 
   return (
-    <div className="bg-sky-500 rounded-tl-md rounded-bl-md w-[500px] h-[500px] p-1 -mt-[50px]">
+    <div className="bg-sky-500 rounded-tl-md rounded-bl-md w-[500px] h-[500px] p-1">
       <div
         ref={scrollChat}
         className="w-full bg-white rounded-md h-[432px] max-h-[432px] border border-stone-900 flex flex-col overflow-scroll pb-1"

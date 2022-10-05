@@ -3,7 +3,7 @@ import { addBookmark, bookmarkAskItem } from "../api/api";
 import { Link } from "react-router-dom";
 import { UserAuth } from "../context/AuthContext";
 import Loading from "./Loading";
-
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SingleItemFocusModal = ({
   data,
@@ -138,6 +138,8 @@ const SingleItemFocusModal = ({
   const [bookmarkCheck, setBookmarkCheck] = useState(false);
   const [logInCheck, setLogInCheck] = useState(false);
 
+  const navigate = useNavigate();
+  const location = useLocation()
 
   useEffect(() => {
     if (Object.values(data).length <= 0) return;
@@ -181,6 +183,23 @@ const SingleItemFocusModal = ({
       }
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  const handleInquire = async () => {
+    try {
+      if (location.pathname === '/message-center') {
+        handleCloseModal()
+        return
+      }
+      await inquireDispatch({
+        type: "CHAT-INQUIRE",
+        payload: { postData: data, userData: user },
+      })
+      navigate('/message-center')
+    } catch (e) 
+    {
+      console.log(e)
     }
   };
 
@@ -310,10 +329,9 @@ const SingleItemFocusModal = ({
               <>
                 <button
                   disabled={user.emailVerified === true ? false : true}
-                  onClick={() => inquireDispatch({
-                    type:"CHAT-INQUIRE",
-                    payload: {postData: data, userData: user}
-                  })}
+                  onClick={() =>
+                    handleInquire()
+                  }
                   className="bg-sky-500 w-full h-10 my-2 disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer rounded-sm hover:bg-sky-600"
                 >
                   {user.emailVerified === true

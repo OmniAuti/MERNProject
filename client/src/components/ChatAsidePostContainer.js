@@ -1,4 +1,10 @@
-const ChatAsidePostContainer = ({ data, modalDispatch }) => {
+const ChatAsidePostContainer = ({ data, modalDispatch, handleDisplayMessages, allDocumentsData }) => {
+
+  const handleMatchChatDataWithPost = async () => {
+    var filteredData = allDocumentsData.filter(post => data._id === post.postData._id)
+    handleDisplayMessages(filteredData[0].messages)
+  }
+  
   return (
     <div className="w-full rounded-md bg-white border border-stone-900 overflow-hidden my-1">
       <div className="p-2 py-1">
@@ -34,7 +40,7 @@ const ChatAsidePostContainer = ({ data, modalDispatch }) => {
         >
           See Post
         </button>}
-        <button className="text-black w-1/2 bg-gray-200 hover:bg-gray-500">
+        <button onClick={() => handleMatchChatDataWithPost()} className="text-black w-1/2 bg-gray-200 hover:bg-gray-500">
           See Chat
         </button>
       </div>

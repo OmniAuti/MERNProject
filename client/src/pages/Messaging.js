@@ -18,7 +18,7 @@ export const Messaging = ({modalDispatch}) => {
     time: "",
     message: "",
   });
-  const [currentMsgs, setCurrentMsgs] = useState({});
+  const [currentMsgs, setCurrentMsgs] = useState([]);
   const [allDocumentsData, setAllDocumentsData] = useState([]);
 
   const { user } = UserAuth();
@@ -35,18 +35,15 @@ export const Messaging = ({modalDispatch}) => {
       res.forEach((msg) => {
         arrHolder.push(msg.data());
       });
-      setAllDocumentsData(arrHolder)
+      setAllDocumentsData(arrHolder.sort((a,b) => a.timeFirstInitiated - b.timeFirstInitiated))
     });
 
-    // GET THIS TO PULL RIGHT NAME
-    const docRef = doc(
-      db,
-      user.uid,
-      "K6latzvX3OQs4x6OOT3zOVddje93-633072bab82f285c13bf4805"
-    );
-    const docData = await getDoc(docRef);
-    setCurrentMsgs(docData.data());
+    handleDisplayMessages(arrHolder[0].messages)
   };
+
+  const handleDisplayMessages = (data) => {
+    setCurrentMsgs(data)
+  }
 
   const handleInput = (e) => {
     setMsgObjSubmit({
@@ -90,7 +87,7 @@ export const Messaging = ({modalDispatch}) => {
         handleInput={handleInput}
         handleSubmit={handleSubmit}
       />
-      <ChatMessagesAside modalDispatch={modalDispatch} allDocumentsData={allDocumentsData} />
+      <ChatMessagesAside handleDisplayMessages={handleDisplayMessages} modalDispatch={modalDispatch} allDocumentsData={allDocumentsData} />
     </section>
   );
 };

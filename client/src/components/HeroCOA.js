@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import styles from "./HeroCoa.css";
 import { useLocation } from "react-router-dom";
 import HeroSectionBuildingBlocks from "./HeroSectionBuildingBlocks";
 import React from "react";
@@ -89,10 +88,7 @@ const HeroCOA = () => {
     <section className="flex flex-col items-start md:flex-row md:justify-around min-h-screen overflow-hidden">
       <div className="w-full min-h-screen flex flex-col justify-evenly sm:items-start lg:w-2/3 mr-0 lg:mr-5 -mt-[50px] sm:-mt-[0px]">
         <div className="lg:w-full w-fit pr-5 lg:pr-0 mx-auto sm:h-2/4 relative overflow-hidden pb-2">
-          <h1
-            id="h1-hero-xs"
-            className="whitespace-nowrap sm:text-8xl xl:text-9xl text-6xl font-extralight sm:tracking-normal track pl-0 sm:pl-0 lg:pl-16 pt-0"
-          >
+          <h1 className="whitespace-nowrap sm:text-8xl xl:text-9xl xs:text-6xl text-[50px] leading-none text-b font-extralight sm:tracking-normal track pl-0 sm:pl-0 lg:pl-16 pt-0">
             <div>
               <h1 className="inline-block lg:block">Can I</h1>
               <h1 className="inline-block lg:block ml-3 sm:pl-5 lg:pl-0 md:ml-0">
@@ -102,7 +98,7 @@ const HeroCOA = () => {
                 a
                 <div
                   ref={wordContainer}
-                  className="inline-block w-fit absolute ml-2 sm:ml-4 lg:ml-5 hero-text-box overflow-hidden pb-72"
+                  className="inline-block  w-fit absolute ml-2 sm:ml-4 lg:ml-5 h-[110px] overflow-hidden pb-72"
                 >
                   {word.map((x) => (
                     <span
@@ -125,7 +121,7 @@ const HeroCOA = () => {
 
         <div className="text-center lg:text-left -mt-[50px] sm:-mt-[0px]">
           <p className="xl:w-3/4 lg:w-5/6 sm:mb-0 mt-0 text-center lg:text-left lg:pl-16 bg-black italic tracking-wide font-thin text-xl ">
-            An easy and effortless community resource for those who are 
+            An easy and effortless community resource for those who are
             struggling to get the supplies they need to succeed in school
           </p>
         </div>

@@ -186,21 +186,16 @@ const SingleItemFocusModal = ({
     }
   };
 
-  const handleDispatch = async () => {
-    inquireDispatch({
-      type: "CHAT-INQUIRE",
-      payload: { postData: data, userData: user },
-    });
-  };
-
   const handleInquire = async () => {
     try {
       if (location.pathname === "/message-center") {
         handleCloseModal();
         return;
       }
-      await handleDispatch();
-      navigate("/message-center");
+      inquireDispatch({
+        type: "CHAT-INQUIRE",
+        payload: { postData: data, userData: user },
+      });
     } catch (e) {
       console.log(e);
     }

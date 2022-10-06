@@ -269,6 +269,7 @@ function App() {
           });
         }
       }
+      navigate('/message-center')
     } catch (e) {
       // console.log(e);
     }

@@ -139,23 +139,24 @@ export const Messaging = ({ modalDispatch }) => {
     }
   };
   return (
-    <section className="h-screen w-full flex flex-col items-center  min-h-[550px]">
-      <h1 className="text-3xl my-10">Message Center</h1>
-      <div className="flex items-center justify-center">
-      <ChatBoxInputContainer
-        user={user}
-        msgObjSubmit={msgObjSubmit}
-        currentMsgs={currentMsgs}
-        handleInput={handleInput}
-        handleSubmit={handleSubmit}
-      />
-      <ChatMessagesAside
-        currentDoc={currentDoc}
-        handleSetCurrentDoc={handleSetCurrentDoc}
-        handleDisplayMessages={handleDisplayMessages}
-        modalDispatch={modalDispatch}
-        allDocumentsData={allDocumentsData}
-      />
+    <section className="h-screen w-full flex flex-col min-h-[550px]">
+      <h1 className="text-3xl my-10 text-center">Message Center</h1>
+      <div className="flex flex-col-reverse md:flex-row items-start z-50 md:mx-auto -ml-5">
+        <ChatBoxInputContainer
+          user={user}
+          msgObjSubmit={msgObjSubmit}
+          currentMsgs={currentMsgs}
+          handleInput={handleInput}
+          handleSubmit={handleSubmit}
+        />
+        <ChatMessagesAside
+          getInitialMessageArray={getInitialMessageArray}
+          currentDoc={currentDoc}
+          handleSetCurrentDoc={handleSetCurrentDoc}
+          handleDisplayMessages={handleDisplayMessages}
+          modalDispatch={modalDispatch}
+          allDocumentsData={allDocumentsData}
+        />
       </div>
     </section>
   );

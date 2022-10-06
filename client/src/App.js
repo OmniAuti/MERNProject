@@ -170,7 +170,6 @@ function App() {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
         navigate("/message-center");
         return;
       } else {
@@ -271,7 +270,7 @@ function App() {
         }
       }
     } catch (e) {
-      console.error(e);
+      console.log(e);
     }
   };
 

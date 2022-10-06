@@ -5,8 +5,10 @@ const ChatAsidePostContainer = ({
   allDocumentsData,
   handleSetCurrentDoc,
   currentDoc,
+  getInitialMessageArray
 }) => {
   const handleMatchChatDataWithPost = async () => {
+    await getInitialMessageArray()
     var filteredData = allDocumentsData.filter(
       (post) => data._id === post.postData._id
     );
@@ -18,8 +20,8 @@ const ChatAsidePostContainer = ({
     <div
       className={
         currentDoc.postData._id === data._id
-          ? "w-full rounded-md bg-white border-4 shadow-md shadow-black border-sky-900 overflow-hidden my-1"
-          : "w-full rounded-md bg-white border border-stone-900 overflow-hidden my-1"
+          ? " rounded-md w-[270px] min-w-[270px] mx-1 md:mx-0 bg-white border-4 shadow-md shadow-black border-sky-900 overflow-hidden my-1"
+          : "rounded-md w-[270px] min-w-[270px]  mx-1 md:mx-0 bg-white border border-stone-900 overflow-hidden my-1"
       }
     >
       <div className="p-2 py-1">
@@ -43,7 +45,7 @@ const ChatAsidePostContainer = ({
                 payload: data._id,
               })
             }
-            className="text-black w-1/2 bg-sky-200 hover:bg-sky-500"
+            className="text-black w-1/2 bg-sky-200 hover:bg-sky-500 h-[30px]"
           >
             See Post
           </button>

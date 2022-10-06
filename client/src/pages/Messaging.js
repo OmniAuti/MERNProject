@@ -32,6 +32,15 @@ export const Messaging = ({ modalDispatch }) => {
     getInitialMessageArray();
   }, [user]);
 
+  const getAsideButtonChatMsgs = async (dataDump) => {
+    await getDoc(
+      doc(db, user.uid, `${dataDump._uid}-${dataDump._id}`)
+    ).then((res) => {
+     setCurrentMsgs(res.data().messages)
+     setCurrentDoc(res.data())
+    });
+  }
+
   const getInitialMessageArray = async () => {
     var arrHolder = [];
     try {
@@ -44,39 +53,36 @@ export const Messaging = ({ modalDispatch }) => {
               (a, b) => b.timeFirstInitiated - a.timeFirstInitiated
             )
           );
-        } 
+        }
       });
       if (arrHolder.length === 0) {
-        handleSetCurrentDoc([]);
-        handleDisplayMessages([]);
-        setAllDocumentsData([])
+        setCurrentDoc([]);
+        setCurrentMsgs([]);
+        setAllDocumentsData([]);
         return;
       }
-      handleSetCurrentDoc(arrHolder[0]);
-      handleDisplayMessages(arrHolder[0].messages);
+      setCurrentDoc(arrHolder[0]);
+      setCurrentMsgs(arrHolder[0].messages);
     } catch (e) {
       console.error(e);
     }
   };
-
-  const getCurrentMessageArray = async () => {
+  const getCurrentMessageArray = async (dataDump) => {
     try {
       await getDoc(
         doc(
           db,
           user.uid,
-          `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+          `${dataDump.postData._uid}-${dataDump.postData._id}`
         )
       ).then((res) => setCurrentMsgs(res.data().messages));
     } catch (e) {
       console.log(e);
     }
   };
-
   const handleDisplayMessages = (data) => {
     setCurrentMsgs(data);
   };
-
   const handleInput = (e) => {
     setMsgObjSubmit({
       ...msgObjSubmit,
@@ -85,7 +91,6 @@ export const Messaging = ({ modalDispatch }) => {
       message: e.target.value,
     });
   };
-
   const handleSetCurrentDoc = (data) => {
     setCurrentDoc(data);
   };
@@ -96,7 +101,7 @@ export const Messaging = ({ modalDispatch }) => {
         const docCheckOne = await getDoc(
           doc(
             db,
-            `${currentDoc.messages[0].uidInitiated}`,
+            `${currentDoc.uidFirstInitiated}`,
             `${currentDoc.postData._uid}-${currentDoc.postData._id}`
           )
         );
@@ -106,7 +111,7 @@ export const Messaging = ({ modalDispatch }) => {
           await updateDoc(
             doc(
               db,
-              `${currentDoc.messages[0].uidInitiated}`,
+              `${currentDoc.uidFirstInitiated}`,
               `${currentDoc.postData._uid}-${currentDoc.postData._id}`
             ),
             {
@@ -114,14 +119,57 @@ export const Messaging = ({ modalDispatch }) => {
             }
           );
         } else {
-          await setDoc(
-            doc(
-              db,
-              `${currentDoc.messages[0].uidInitiated}`,
-              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
-            ),
-            msgObjSubmit
-          );
+          if (currentDoc.postData.postType === "ask") {
+            await setDoc(
+              doc(
+                db,
+                `${currentDoc.uidFirstInitiated}`,
+                `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+              ),
+              {
+                messages: [msgObjSubmit],
+                timeFirstInitiated: currentDoc.timeFirstInitiated,
+                uidFirstInitiated: currentDoc.uidFirstInitiated,
+                postData: {
+                  condition: currentDoc.postData.condition,
+                  specify: currentDoc.postData.specify,
+                  location: currentDoc.postData.location,
+                  postType: currentDoc.postData.postType,
+                  quantity: currentDoc.postData.quantity,
+                  type: currentDoc.postData.type,
+                  who: currentDoc.postData.who,
+                  zipcode: currentDoc.postData.zipcode,
+                  _id: currentDoc.postData._id,
+                  _uid: currentDoc.postData._uid,
+                },
+              }
+            );
+          } else if (currentDoc.postData.postType === "offer") {
+            // CHAT INTIATOR  --------------------------------------------
+            await setDoc(
+              doc(
+                db,
+                `${currentDoc.uidFirstInitiated}`,
+                `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+              ),
+              {
+                messages: [msgObjSubmit],
+                timeFirstInitiated: currentDoc.timeFirstInitiated,
+                uidFirstInitiated: currentDoc.uidFirstInitiated,
+                postData: {
+                  condition: currentDoc.postData.condition,
+                  description: currentDoc.postData.description,
+                  location: currentDoc.postData.location,
+                  postType: currentDoc.postData.postType,
+                  quantity: currentDoc.postData.quantity,
+                  type: currentDoc.postData.type,
+                  zipcode: currentDoc.postData.zipcode,
+                  _id: currentDoc.postData._id,
+                  _uid: currentDoc.postData._uid,
+                },
+              }
+            );
+          }
         }
         const docCheckTwo = await getDoc(
           doc(
@@ -143,16 +191,59 @@ export const Messaging = ({ modalDispatch }) => {
             }
           );
         } else {
-          await setDoc(
-            doc(
-              db,
-              `${user.uid}`,
-              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
-            ),
-            msgObjSubmit
-          );
+          if (currentDoc.postData.postType === "ask") {
+            await setDoc(
+              doc(
+                db,
+                `${user.uid}`,
+                `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+              ),
+              {
+                messages: [msgObjSubmit],
+                timeFirstInitiated: currentDoc.timeFirstInitiated,
+                uidFirstInitiated: currentDoc.uidFirstInitiated,
+                postData: {
+                  condition: currentDoc.postData.condition,
+                  specify: currentDoc.postData.specify,
+                  location: currentDoc.postData.location,
+                  postType: currentDoc.postData.postType,
+                  quantity: currentDoc.postData.quantity,
+                  type: currentDoc.postData.type,
+                  who: currentDoc.postData.who,
+                  zipcode: currentDoc.postData.zipcode,
+                  _id: currentDoc.postData._id,
+                  _uid: currentDoc.postData._uid,
+                },
+              }
+            );
+          } else if (currentDoc.postData.postType === "offer") {
+            // CHAT INTIATOR  --------------------------------------------
+            await setDoc(
+              doc(
+                db,
+                `${user.uid}`,
+                `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+              ),
+              {
+                messages: [msgObjSubmit],
+                timeFirstInitiated: currentDoc.timeFirstInitiated,
+                uidFirstInitiated: currentDoc.uidFirstInitiated,
+                postData: {
+                  condition: currentDoc.postData.condition,
+                  description: currentDoc.postData.description,
+                  location: currentDoc.postData.location,
+                  postType: currentDoc.postData.postType,
+                  quantity: currentDoc.postData.quantity,
+                  type: currentDoc.postData.type,
+                  zipcode: currentDoc.postData.zipcode,
+                  _id: currentDoc.postData._id,
+                  _uid: currentDoc.postData._uid,
+                },
+              }
+            );
+          }
         }
-      } else if (user.uid === currentDoc.messages[0].uidInitiated) {
+      } else if (user.uid === currentDoc.uidFirstInitiated) {
         const docCheckOne = await getDoc(
           doc(
             db,
@@ -172,14 +263,57 @@ export const Messaging = ({ modalDispatch }) => {
             }
           );
         } else {
-          await setDoc(
-            doc(
-              db,
-              `${user.uid}`,
-              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
-            ),
-            msgObjSubmit
-          );
+          if (currentDoc.postData.postType === "ask") {
+            await setDoc(
+              doc(
+                db,
+                `${user.uid}`,
+                `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+              ),
+              {
+                messages: [msgObjSubmit],
+                timeFirstInitiated: currentDoc.timeFirstInitiated,
+                uidFirstInitiated: currentDoc.uidFirstInitiated,
+                postData: {
+                  condition: currentDoc.postData.condition,
+                  specify: currentDoc.postData.specify,
+                  location: currentDoc.postData.location,
+                  postType: currentDoc.postData.postType,
+                  quantity: currentDoc.postData.quantity,
+                  type: currentDoc.postData.type,
+                  who: currentDoc.postData.who,
+                  zipcode: currentDoc.postData.zipcode,
+                  _id: currentDoc.postData._id,
+                  _uid: currentDoc.postData._uid,
+                },
+              }
+            );
+          } else if (currentDoc.postData.postType === "offer") {
+            // CHAT INTIATOR  --------------------------------------------
+            await setDoc(
+              doc(
+                db,
+                `${user.uid}`,
+                `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+              ),
+              {
+                messages: [msgObjSubmit],
+                timeFirstInitiated: currentDoc.timeFirstInitiated,
+                uidFirstInitiated: currentDoc.uidFirstInitiated,
+                postData: {
+                  condition: currentDoc.postData.condition,
+                  description: currentDoc.postData.description,
+                  location: currentDoc.postData.location,
+                  postType: currentDoc.postData.postType,
+                  quantity: currentDoc.postData.quantity,
+                  type: currentDoc.postData.type,
+                  zipcode: currentDoc.postData.zipcode,
+                  _id: currentDoc.postData._id,
+                  _uid: currentDoc.postData._uid,
+                },
+              }
+            );
+          }
         }
 
         const docCheckTwo = await getDoc(
@@ -201,21 +335,65 @@ export const Messaging = ({ modalDispatch }) => {
             }
           );
         } else {
-          await setDoc(
-            doc(
-              db,
-              `${currentDoc.postData._uid}`,
-              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
-            ),
-            msgObjSubmit
-          );
+          if (currentDoc.postData.postType === "ask") {
+            await setDoc(
+              doc(
+                db,
+                `${currentDoc.postData._uid}`,
+                `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+              ),
+              {
+                messages: [msgObjSubmit],
+                timeFirstInitiated: currentDoc.timeFirstInitiated,
+                uidFirstInitiated: currentDoc.uidFirstInitiated,
+                postData: {
+                  condition: currentDoc.postData.condition,
+                  specify: currentDoc.postData.specify,
+                  location: currentDoc.postData.location,
+                  postType: currentDoc.postData.postType,
+                  quantity: currentDoc.postData.quantity,
+                  type: currentDoc.postData.type,
+                  who: currentDoc.postData.who,
+                  zipcode: currentDoc.postData.zipcode,
+                  _id: currentDoc.postData._id,
+                  _uid: currentDoc.postData._uid,
+                },
+              }
+            );
+          } else if (currentDoc.postData.postType === "offer") {
+            // CHAT INTIATOR  --------------------------------------------
+            await setDoc(
+              doc(
+                db,
+                `${currentDoc.postData._uid}`,
+                `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+              ),
+              {
+                messages: [msgObjSubmit],
+                timeFirstInitiated: currentDoc.timeFirstInitiated,
+                uidFirstInitiated: currentDoc.uidFirstInitiated,
+                postData: {
+                  condition: currentDoc.postData.condition,
+                  description: currentDoc.postData.description,
+                  location: currentDoc.postData.location,
+                  postType: currentDoc.postData.postType,
+                  quantity: currentDoc.postData.quantity,
+                  type: currentDoc.postData.type,
+                  zipcode: currentDoc.postData.zipcode,
+                  _id: currentDoc.postData._id,
+                  _uid: currentDoc.postData._uid,
+                },
+              }
+            );
+          }
         }
       }
+      await getCurrentMessageArray(currentDoc);
+
       setMsgObjSubmit({
         time: "",
         message: "",
       });
-      await getCurrentMessageArray();
     } catch (e) {
       console.log(e);
     }
@@ -247,10 +425,9 @@ export const Messaging = ({ modalDispatch }) => {
           handleDelete={handleDelete}
           getInitialMessageArray={getInitialMessageArray}
           currentDoc={currentDoc}
-          handleSetCurrentDoc={handleSetCurrentDoc}
-          handleDisplayMessages={handleDisplayMessages}
           modalDispatch={modalDispatch}
           allDocumentsData={allDocumentsData}
+          getAsideButtonChatMsgs={getAsideButtonChatMsgs}
         />
       </div>
     </section>

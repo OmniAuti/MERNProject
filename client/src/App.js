@@ -184,6 +184,7 @@ function App() {
               },
             ],
             timeFirstInitiated: Date.now(),
+            uidFirstInitiated:user.uid,
             postData: {
               condition: data.condition,
               specify: data.specify,
@@ -207,6 +208,7 @@ function App() {
               },
             ],
             timeFirstInitiated: Date.now(),
+            uidFirstInitiated:user.uid,
             postData: {
               condition: data.condition,
               specify: data.specify,
@@ -231,6 +233,7 @@ function App() {
               },
             ],
             timeFirstInitiated: Date.now(),
+            uidFirstInitiated:user.uid,
             postData: {
               condition: data.condition,
               description: data.description,
@@ -254,6 +257,7 @@ function App() {
               },
             ],
             timeFirstInitiated: Date.now(),
+            uidFirstInitiated:user.uid,
             postData: {
               condition: data.condition,
               description: data.description,

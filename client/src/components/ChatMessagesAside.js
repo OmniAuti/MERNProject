@@ -3,11 +3,10 @@ import ChatAsidePostContainer from "./ChatAsidePostContainer";
 const ChatMessagesAside = ({
   allDocumentsData,
   modalDispatch,
-  handleDisplayMessages,
-  handleSetCurrentDoc,
   currentDoc,
   getInitialMessageArray,
   handleDelete,
+  getAsideButtonChatMsgs,
 }) => {
 
   return (
@@ -22,12 +21,11 @@ const ChatMessagesAside = ({
               handleDelete={handleDelete}
               getInitialMessageArray={getInitialMessageArray}
               currentDoc={currentDoc}
-              handleSetCurrentDoc={handleSetCurrentDoc}
-              handleDisplayMessages={handleDisplayMessages}
               allDocumentsData={allDocumentsData}
               modalDispatch={modalDispatch}
               key={data.timeFirstInitiated}
               data={data.postData}
+              getAsideButtonChatMsgs={getAsideButtonChatMsgs}
             />
           ))
         )}

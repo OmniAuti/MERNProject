@@ -1,29 +1,18 @@
+
 const ChatAsidePostContainer = ({
   data,
   modalDispatch,
-  handleDisplayMessages,
-  allDocumentsData,
-  handleSetCurrentDoc,
   currentDoc,
-  getInitialMessageArray,
   handleDelete,
+  getAsideButtonChatMsgs,
 }) => {
-
-
-
-  const handleMatchChatDataWithPost = async () => {
-    console.log(allDocumentsData, 'aside')
-    await getInitialMessageArray();
-    var filteredData = allDocumentsData.filter(
-      (post) => data._id === post.postData._id
-    );
-    handleDisplayMessages(filteredData[0].messages);
-    handleSetCurrentDoc(filteredData[0]);
+  const handleMatchChatDataWithPost = async (data) => {
+    getAsideButtonChatMsgs(data)
   };
 
   const handleDeleteChat = (chatData) => {
-    handleDelete(chatData)
-  }
+    handleDelete(chatData);
+  };
 
   return (
     <div
@@ -72,12 +61,15 @@ const ChatAsidePostContainer = ({
           </button>
         )}
         <button
-          onClick={() => handleMatchChatDataWithPost()}
+          onClick={() => handleMatchChatDataWithPost(data)}
           className="text-black w-1/3 bg-gray-200 hover:bg-gray-500 hover:text-white"
         >
           See Chat
         </button>
-        <button onClick={() => handleDeleteChat(currentDoc)} className="text-black w-1/3 hover:text-white bg-red-200 hover:bg-red-500">
+        <button
+          onClick={() => handleDeleteChat(currentDoc)}
+          className="text-black w-1/3 hover:text-white bg-red-200 hover:bg-red-500"
+        >
           Delete
         </button>
       </div>

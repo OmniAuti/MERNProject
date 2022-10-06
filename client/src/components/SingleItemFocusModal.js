@@ -139,7 +139,7 @@ const SingleItemFocusModal = ({
   const [logInCheck, setLogInCheck] = useState(false);
 
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
 
   useEffect(() => {
     if (Object.values(data).length <= 0) return;
@@ -186,20 +186,23 @@ const SingleItemFocusModal = ({
     }
   };
 
+  const handleDispatch = async () => {
+    inquireDispatch({
+      type: "CHAT-INQUIRE",
+      payload: { postData: data, userData: user },
+    });
+  };
+
   const handleInquire = async () => {
     try {
-      if (location.pathname === '/message-center') {
-        handleCloseModal()
-        return
+      if (location.pathname === "/message-center") {
+        handleCloseModal();
+        return;
       }
-      await inquireDispatch({
-        type: "CHAT-INQUIRE",
-        payload: { postData: data, userData: user },
-      })
-      navigate('/message-center')
-    } catch (e) 
-    {
-      console.log(e)
+      await handleDispatch();
+      navigate("/message-center");
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -329,9 +332,7 @@ const SingleItemFocusModal = ({
               <>
                 <button
                   disabled={user.emailVerified === true ? false : true}
-                  onClick={() =>
-                    handleInquire()
-                  }
+                  onClick={() => handleInquire()}
                   className="bg-sky-500 w-full h-10 my-2 disabled:bg-gray-400 disabled:cursor-not-allowed cursor-pointer rounded-sm hover:bg-sky-600"
                 >
                   {user.emailVerified === true

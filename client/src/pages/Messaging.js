@@ -7,6 +7,8 @@ import {
   arrayUnion,
   updateDoc,
   collection,
+  deleteDoc,
+  setDoc,
 } from "firebase/firestore";
 import { UserAuth } from "../context/AuthContext";
 import ChatBoxInputContainer from "../components/ChatBoxInputContainer";
@@ -33,16 +35,23 @@ export const Messaging = ({ modalDispatch }) => {
   const getInitialMessageArray = async () => {
     var arrHolder = [];
     try {
-      await getDocs(collection(db, user.uid)).then((res) => {
-        res.forEach((msg) => {
+      const collectionCheck = await getDocs(collection(db, user.uid));
+      collectionCheck.forEach((msg) => {
+        if (msg.exists()) {
           arrHolder.push(msg.data());
-        });
-        setAllDocumentsData(
-          arrHolder.sort((a, b) => b.timeFirstInitiated - a.timeFirstInitiated)
-        );
+          setAllDocumentsData(
+            arrHolder.sort(
+              (a, b) => b.timeFirstInitiated - a.timeFirstInitiated
+            )
+          );
+        } 
       });
-
-      if (arrHolder.length === 0) return;
+      if (arrHolder.length === 0) {
+        handleSetCurrentDoc([]);
+        handleDisplayMessages([]);
+        setAllDocumentsData([])
+        return;
+      }
       handleSetCurrentDoc(arrHolder[0]);
       handleDisplayMessages(arrHolder[0].messages);
     } catch (e) {
@@ -80,54 +89,127 @@ export const Messaging = ({ modalDispatch }) => {
   const handleSetCurrentDoc = (data) => {
     setCurrentDoc(data);
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (user.uid === currentDoc.postData._uid) {
-        //UPDATES CHAT INITIATOR MESSAGE ARRAY
-        await updateDoc(
+        const docCheckOne = await getDoc(
           doc(
             db,
             `${currentDoc.messages[0].uidInitiated}`,
             `${currentDoc.postData._uid}-${currentDoc.postData._id}`
-          ),
-          {
-            messages: arrayUnion(msgObjSubmit),
-          }
+          )
         );
-        // UPDATES POST USER MESSAGE ARRAY
-        await updateDoc(
+        // CHECK FOR EXISTING DOCUMENT
+        if (docCheckOne.exists()) {
+          //UPDATES CHAT INITIATOR MESSAGE ARRAY
+          await updateDoc(
+            doc(
+              db,
+              `${currentDoc.messages[0].uidInitiated}`,
+              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+            ),
+            {
+              messages: arrayUnion(msgObjSubmit),
+            }
+          );
+        } else {
+          await setDoc(
+            doc(
+              db,
+              `${currentDoc.messages[0].uidInitiated}`,
+              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+            ),
+            msgObjSubmit
+          );
+        }
+        const docCheckTwo = await getDoc(
           doc(
             db,
             `${user.uid}`,
             `${currentDoc.postData._uid}-${currentDoc.postData._id}`
-          ),
-          {
-            messages: arrayUnion(msgObjSubmit),
-          }
+          )
         );
+        if (docCheckTwo.exists()) {
+          // UPDATES POST USER MESSAGE ARRAY
+          await updateDoc(
+            doc(
+              db,
+              `${user.uid}`,
+              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+            ),
+            {
+              messages: arrayUnion(msgObjSubmit),
+            }
+          );
+        } else {
+          await setDoc(
+            doc(
+              db,
+              `${user.uid}`,
+              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+            ),
+            msgObjSubmit
+          );
+        }
       } else if (user.uid === currentDoc.messages[0].uidInitiated) {
-        await updateDoc(
+        const docCheckOne = await getDoc(
           doc(
             db,
             `${user.uid}`,
             `${currentDoc.postData._uid}-${currentDoc.postData._id}`
-          ),
-          {
-            messages: arrayUnion(msgObjSubmit),
-          }
+          )
         );
-        await updateDoc(
+        if (docCheckOne.exists()) {
+          await updateDoc(
+            doc(
+              db,
+              `${user.uid}`,
+              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+            ),
+            {
+              messages: arrayUnion(msgObjSubmit),
+            }
+          );
+        } else {
+          await setDoc(
+            doc(
+              db,
+              `${user.uid}`,
+              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+            ),
+            msgObjSubmit
+          );
+        }
+
+        const docCheckTwo = await getDoc(
           doc(
             db,
             `${currentDoc.postData._uid}`,
             `${currentDoc.postData._uid}-${currentDoc.postData._id}`
-          ),
-          {
-            messages: arrayUnion(msgObjSubmit),
-          }
+          )
         );
+        if (docCheckTwo.exists()) {
+          await updateDoc(
+            doc(
+              db,
+              `${currentDoc.postData._uid}`,
+              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+            ),
+            {
+              messages: arrayUnion(msgObjSubmit),
+            }
+          );
+        } else {
+          await setDoc(
+            doc(
+              db,
+              `${currentDoc.postData._uid}`,
+              `${currentDoc.postData._uid}-${currentDoc.postData._id}`
+            ),
+            msgObjSubmit
+          );
+        }
       }
       setMsgObjSubmit({
         time: "",
@@ -138,10 +220,22 @@ export const Messaging = ({ modalDispatch }) => {
       console.log(e);
     }
   };
+  const handleDelete = async (data) => {
+    console.log();
+    try {
+      await deleteDoc(
+        doc(db, user.uid, `${data.postData._uid}-${data.postData._id}`)
+      );
+      getInitialMessageArray();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
-    <section className="h-screen w-full flex flex-col min-h-[550px]">
+    <section className="h-screen w-full flex flex-col min-h-[600px]">
       <h1 className="text-3xl my-10 text-center">Message Center</h1>
-      <div className="flex flex-col-reverse md:flex-row items-start z-50 md:mx-auto -ml-5">
+      <div className="flex flex-col-reverse md:flex-row items-start z-40 md:mx-auto -ml-5">
         <ChatBoxInputContainer
           user={user}
           msgObjSubmit={msgObjSubmit}
@@ -150,6 +244,7 @@ export const Messaging = ({ modalDispatch }) => {
           handleSubmit={handleSubmit}
         />
         <ChatMessagesAside
+          handleDelete={handleDelete}
           getInitialMessageArray={getInitialMessageArray}
           currentDoc={currentDoc}
           handleSetCurrentDoc={handleSetCurrentDoc}

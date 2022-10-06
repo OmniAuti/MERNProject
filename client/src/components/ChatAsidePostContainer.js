@@ -5,10 +5,15 @@ const ChatAsidePostContainer = ({
   allDocumentsData,
   handleSetCurrentDoc,
   currentDoc,
-  getInitialMessageArray
+  getInitialMessageArray,
+  handleDelete,
 }) => {
+
+
+
   const handleMatchChatDataWithPost = async () => {
-    await getInitialMessageArray()
+    console.log(allDocumentsData, 'aside')
+    await getInitialMessageArray();
     var filteredData = allDocumentsData.filter(
       (post) => data._id === post.postData._id
     );
@@ -16,15 +21,19 @@ const ChatAsidePostContainer = ({
     handleSetCurrentDoc(filteredData[0]);
   };
 
+  const handleDeleteChat = (chatData) => {
+    handleDelete(chatData)
+  }
+
   return (
     <div
       className={
         currentDoc.postData._id === data._id
-          ? " rounded-md w-[270px] min-w-[270px] mx-1 md:mx-0 bg-white border-4 shadow-md shadow-black border-sky-900 overflow-hidden my-1"
-          : "rounded-md w-[270px] min-w-[270px]  mx-1 md:mx-0 bg-white border border-stone-900 overflow-hidden my-1"
+          ? " rounded-md w-[270px] min-w-[270px] h-[118px] mx-1 md:mx-0 bg-white border-4 shadow-md shadow-black border-sky-900 overflow-hidden my-1"
+          : "rounded-md w-[270px] min-w-[270px] h-[112px]  mx-1 md:mx-0 bg-white border border-stone-900 overflow-hidden my-1"
       }
     >
-      <div className="p-2 py-1">
+      <div className="px-2 py-1">
         <p className="text-black ">
           {" "}
           Supplies: {data.type.slice(0, 1).toUpperCase() + data.type.slice(1)}
@@ -36,7 +45,7 @@ const ChatAsidePostContainer = ({
           {data.location.slice(0, 1).toUpperCase() + data.location.slice(1)}
         </p>
       </div>
-      <div className="flex">
+      <div className="flex h-[30px] overflow-hidden">
         {data.postType === "offer" ? (
           <button
             onClick={() =>
@@ -45,7 +54,7 @@ const ChatAsidePostContainer = ({
                 payload: data._id,
               })
             }
-            className="text-black w-1/2 bg-sky-200 hover:bg-sky-500 h-[30px]"
+            className="text-black w-1/3 hover:text-white bg-sky-200 hover:bg-sky-500"
           >
             See Post
           </button>
@@ -57,16 +66,19 @@ const ChatAsidePostContainer = ({
                 payload: data._id,
               })
             }
-            className="text-black w-1/2 bg-sky-200 hover:bg-sky-500"
+            className="text-black w-1/3 hover:text-white bg-sky-200 hover:bg-sky-500"
           >
             See Post
           </button>
         )}
         <button
           onClick={() => handleMatchChatDataWithPost()}
-          className="text-black w-1/2 bg-gray-200 hover:bg-gray-500"
+          className="text-black w-1/3 bg-gray-200 hover:bg-gray-500 hover:text-white"
         >
           See Chat
+        </button>
+        <button onClick={() => handleDeleteChat(currentDoc)} className="text-black w-1/3 hover:text-white bg-red-200 hover:bg-red-500">
+          Delete
         </button>
       </div>
     </div>

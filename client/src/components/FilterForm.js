@@ -64,7 +64,7 @@ const FilterForm = ({ handleFilterForm, handlePostFailure }) => {
       className="text-black flex w-full md:w-1/2 lg:w-full mx-auto flex-col items-center"
       onSubmit={(e) => handleQuery(e)}
     >
-      <div className="text-black flex flex-col lg:flex-row justify-around items-center w-full mt-2">
+      <div className="text-white flex flex-col lg:flex-row justify-around items-center w-full mt-2">
         <div className="flex flex-col items-center w-3/4 lg:w-fit justify-around">
           <label className="my-2 text-xl" htmlFor="type">
             Type Of Supplies

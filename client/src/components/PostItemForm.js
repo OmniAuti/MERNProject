@@ -129,7 +129,7 @@ const PostItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
   };
 
   return (
-    <div className="text-center block sm:w-3/4 w-full lg:w-1/2 xl:w-1/3 xl:mx-auto mx-auto relative lg:mx-5 max-h-[750px] h-[750px] min-h-[750px]">
+    <div className="text-center  block sm:w-3/4 w-full lg:w-1/2 xl:w-1/3 xl:mx-auto mx-auto relative lg:mx-5 max-h-[750px] h-[750px] min-h-[750px]">
       <h2 className="text-3xl mb-5 underline">Offer Supplies</h2>
       {postLoading && (
         <div className="absolute bg-black w-full h-full">
@@ -142,11 +142,11 @@ const PostItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
         </div>
       )}
       {!postSuccess && (
-        <form onSubmit={(e) => handleSubmit(e)} className="text-black text-xl">
+        <form onSubmit={(e) => handleSubmit(e)} className="text-white text-xl">
           <label htmlFor="type">Type of supplies</label>
           <select
             id="type"
-            className="w-full h-10 my-2 pl-1 text-center rounded-md"
+            className="w-full text-black h-10 my-2 pl-1 text-center rounded-md"
             required
             onChange={(e) => handleTypeChange(e)}
             value={formData.type}
@@ -184,7 +184,7 @@ const PostItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
           <input
             id="description"
             onChange={(e) => handleDescriptionChange(e)}
-            className="block w-full h-10 my-2 pl-1 text-center rounded-md"
+            className="block text-black w-full h-10 my-2 pl-1 text-center rounded-md"
             type="text"
             name="type"
             maxLength="49"
@@ -196,7 +196,7 @@ const PostItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
             id="quantity"
             required
             onChange={(e) => handleQuantityChange(e)}
-            className="block w-1/2 h-10 my-2 mx-auto pl-1 text-center rounded-md"
+            className="block text-black w-1/2 h-10 my-2 mx-auto pl-1 text-center rounded-md"
             type="number"
             name="quantity"
             max="999"
@@ -209,7 +209,7 @@ const PostItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
             id="condition"
             required
             onChange={(e) => handleConditionChange(e)}
-            className="block w-full h-10 my-2 pl-1 text-center rounded-md"
+            className="block text-black w-full h-10 my-2 pl-1 text-center rounded-md"
             value={formData.condition}
           >
             <option default value="">
@@ -238,7 +238,7 @@ const PostItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
                id="location"
                required
                onChange={(e) => handleLocationChange(e)}
-               className="block w-full h-10 my-2 pl-1 text-center rounded-md"
+               className="block text-black w-full h-10 my-2 pl-1 text-center rounded-md"
                type="text"
                name="location"
                maxLength="49"
@@ -341,7 +341,7 @@ const PostItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
                 id="zipcode"
                 required
                 onChange={(e) => handleZIPChange(e)}
-                className="block w-full h-10 my-2 pl-1 text-center rounded-md"
+                className="block text-black w-full h-10 my-2 pl-1 text-center rounded-md"
                 type="text"
                 pattern="[0-9]{5}"
                 maxLength="5"
@@ -442,7 +442,7 @@ const PostItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
             id="file"
             name="file"
             type="file"
-            className="block w-full p-2 my-2 rounded-md border mx-auto cursor-pointer text-white hover:border-sky-500"
+            className="block w-full text-black p-2 my-2 rounded-md border mx-auto cursor-pointer text-white hover:border-sky-500"
             onChange={(e) => setImageUpload(e.target.files[0])}
           />
           <input

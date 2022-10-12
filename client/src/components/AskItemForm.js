@@ -153,7 +153,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
           )}
           {!postSuccess && (
             <form
-              className="text-black text-xl"
+              className="text-white text-xl"
               onSubmit={(e) => handleSubmit(e)}
             >
               <label htmlFor="who">I am a . . .</label>
@@ -161,7 +161,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
                 onChange={(e) => setAskObj({ ...askObj, who: e.target.value })}
                 id="who"
                 name="who"
-                className="w-full h-10 my-2 pl-1 text-center rounded-md"
+                className="w-full text-black h-10 my-2 pl-1 text-center rounded-md"
                 required
                 value={setAskObj.who}
               >
@@ -178,7 +178,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
               <select
                 value={askObj.type}
                 id="type"
-                className="w-full h-10 my-2 pl-1 text-center rounded-md"
+                className="w-full text-black h-10 my-2 pl-1 text-center rounded-md"
                 required
                 onChange={(e) => setAskObj({ ...askObj, type: e.target.value })}
               >
@@ -215,7 +215,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
               <input
                 id="quantity"
                 required
-                className="block w-1/2 h-10 my-2 mx-auto pl-1 text-center rounded-md"
+                className="block w-1/2 h-10 text-black my-2 mx-auto pl-1 text-center rounded-md"
                 type="number"
                 name="quantity"
                 max="999"
@@ -227,7 +227,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
               <input
                 id="specify"
                 required
-                className="block w-full h-10 my-2 pl-1 text-center rounded-md"
+                className="block w-full text-black h-10 my-2 pl-1 text-center rounded-md"
                 type="text"
                 name="specify"
                 maxLength="49"
@@ -261,7 +261,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
                         id={checkbox.value}
                         type="checkbox"
                         value={checkbox.value}
-                        className="cursor-pointer"
+                        className="cursor-pointer text-black"
                       />
                     </div>
                   );
@@ -283,7 +283,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
               <select
                 id="location"
                 required
-                className="block w-full h-10 my-2 pl-1 text-center rounded-md"
+                className="block w-full text-black h-10 my-2 pl-1 text-center rounded-md"
                 type="text"
                 name="location"
                 onChange={(e) =>
@@ -388,7 +388,7 @@ const AskItemForm = ({ handleUpdateAfterPost, handlePostFailure }) => {
               <select
                 id="zipcode"
                 required
-                className="block w-full h-10 my-2 pl-1 text-center rounded-md"
+                className="block w-full text-black h-10 my-2 pl-1 text-center rounded-md"
                 type="text"
                 pattern="[0-9]{5}"
                 maxLength="5"

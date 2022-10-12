@@ -18,8 +18,8 @@ const ChatAsidePostContainer = ({
     <div
       className={
         currentDoc.postData._id === data._id
-          ? " rounded-md w-[270px] min-w-[270px] h-[118px] mx-1 md:mx-0 bg-white border-4 shadow-md shadow-black border-sky-900 overflow-hidden my-1"
-          : "rounded-md w-[270px] min-w-[270px] h-[112px]  mx-1 md:mx-0 bg-white border border-stone-900 overflow-hidden my-1"
+          ? " rounded-md w-[270px] min-w-fit h-[118px] mx-1 md:mx-0 bg-white border-4 shadow-md shadow-black border-sky-900 overflow-hidden my-1"
+          : "rounded-md w-[270px] min-w-fit h-[112px]  mx-1 md:mx-0 bg-white border border-stone-900 overflow-hidden my-1"
       }
     >
       <div className="px-2 py-1">
